@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci0h0ouh645e1"]
+
+[ext_resource type="Script" path="res://ui/floating_inventory_slot.gd" id="1_5wl4c"]
+
+[node name="FloatingSlot" type="PanelContainer"]
+script = ExtResource("1_5wl4c")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+horizontal_alignment = 2
+vertical_alignment = 2

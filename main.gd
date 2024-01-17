@@ -29,6 +29,8 @@ enum GameState {
 @onready var player_equipment_display: InventoryPanel = $ControlLayer/InventoryDisplay/VBoxContainer/EquipSlots
 @onready var player_crafting_panel: CraftingPanel = $ControlLayer/InventoryDisplay/VBoxContainer/CraftingPanel
 
+@onready var floating_slot: FloatingInventorySlot = $ControlLayer/FloatingSlot
+
 # Other
 @onready var pause_menu: Control = $ControlLayer/PauseMenu
 @onready var loading_panel: Control = $ControlLayer/LoadingPanel
@@ -88,8 +90,13 @@ func spawn_player():
 	
 	player_inventory_display.display_inventory(local_player_instance.inventory, local_player_instance.equipment_size)
 	player_equipment_display.display_inventory(local_player_instance.inventory, 0, local_player_instance.equipment_size)
-	player_crafting_panel.display_recipe_list(local_player_instance.known_recipes, local_player_instance.inventory)
+	player_inventory_display.inventory_slot_clicked.connect(local_player_instance.slot_clicked)
+	player_equipment_display.inventory_slot_clicked.connect(local_player_instance.slot_clicked)
 	
+	floating_slot.set_display(local_player_instance.floating_slot)
+	local_player_instance.floating_slot.slot_updated.connect(floating_slot.set_floating_display)
+	
+	player_crafting_panel.display_recipe_list(local_player_instance.known_recipes, local_player_instance.inventory)
 	player_crafting_panel.recipe_craft_attempted.connect(local_player_instance.craft_recipe)
 	
 	current_state = GameState.IN_GAME

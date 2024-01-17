@@ -17,6 +17,7 @@ var speed_mod: float = 1
 var inventory: InventoryData
 var active_equipment_index: int = 0
 var active_equipment_slot: SlotData
+var floating_slot: SlotData
 
 @export var known_recipes: Array[RecipeData]
 
@@ -26,6 +27,8 @@ var in_menu: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	inventory = InventoryData.new(inventory_size + equipment_size)
+	floating_slot = SlotData.new()
+	
 	select_slot(active_equipment_index)
 
 
@@ -73,6 +76,27 @@ func select_slot(slot_index: int):
 	
 	active_equipment_slot = inventory.slots[active_equipment_index]
 	active_equipment_slot.set_selected(true)
+
+
+func slot_clicked(slot_data: SlotData, was_primary: bool):
+	if floating_slot.is_empty():
+		stack_to_floating(slot_data, !was_primary)
+	else:
+		stack_from_floating(slot_data, !was_primary)
+
+
+func stack_to_floating(slot_data: SlotData, half: bool = false):
+	if half:
+		floating_slot.split_from_slot(slot_data)
+	else:
+		floating_slot.stack_from_slot(slot_data)
+
+
+func stack_from_floating(to_slot: SlotData, single: bool = false):
+	if not single:
+		to_slot.stack_from_slot(floating_slot)
+	else:
+		to_slot.add_from_slot(floating_slot)
 
 
 func pick_up(item: Item) -> bool:

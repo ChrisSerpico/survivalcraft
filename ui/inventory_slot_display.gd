@@ -2,6 +2,9 @@ extends PanelContainer
 class_name InventorySlotDisplay
 
 
+signal slot_display_clicked(slot_data: SlotData, was_primary: bool)
+
+
 @onready var texture_rect: TextureRect = $TextureRect
 @onready var label: Label = $Label
 
@@ -39,3 +42,10 @@ func set_display(slot: SlotData):
 	else:
 		theme_type_variation = ""
 	
+
+
+func _on_gui_input(event: InputEvent):
+	if event.is_action_pressed("primary"):
+		slot_display_clicked.emit(displayed_slot, true)
+	elif event.is_action_pressed("secondary"):
+		slot_display_clicked.emit(displayed_slot, false)

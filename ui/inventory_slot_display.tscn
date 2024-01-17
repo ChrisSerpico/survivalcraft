@@ -15,5 +15,6 @@ size_flags_vertical = 1
 horizontal_alignment = 2
 vertical_alignment = 2
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="show_tooltip"]
 [connection signal="mouse_exited" from="." to="." method="hide_tooltip"]

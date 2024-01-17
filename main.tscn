@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://31wti5s0o1mh"]
+[gd_scene load_steps=14 format=3 uid="uid://31wti5s0o1mh"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_66gbd"]
 [ext_resource type="Script" path="res://player/player_camera.gd" id="1_imwk0"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cnohjchaxs1r1" path="res://player/assets/previews/character03_preview.tres" id="7_h23bh"]
 [ext_resource type="Texture2D" uid="uid://bnv5pdnvpx25m" path="res://player/assets/previews/character04_preview.tres" id="8_ecsaq"]
 [ext_resource type="PackedScene" uid="uid://c3jrufvytiisi" path="res://ui/crafting/crafting_panel.tscn" id="9_36d20"]
+[ext_resource type="PackedScene" uid="uid://ci0h0ouh645e1" path="res://ui/floating_inventory_slot.tscn" id="12_jw01c"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qb055"]
 
@@ -254,6 +255,9 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_qb055")
 item_tooltip = NodePath("../../../ItemTooltip")
 
 [node name="ItemTooltip" parent="ControlLayer" instance=ExtResource("7_3ruep")]
+visible = false
+
+[node name="FloatingSlot" parent="ControlLayer" instance=ExtResource("12_jw01c")]
 visible = false
 
 [connection signal="generation_finished" from="Map" to="." method="spawn_player"]
