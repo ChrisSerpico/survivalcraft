@@ -1,0 +1,51 @@
+[gd_scene load_steps=10 format=3 uid="uid://cdnu21nmx5s8l"]
+
+[ext_resource type="Script" path="res://entity/entity.gd" id="1_3f842"]
+[ext_resource type="Texture2D" uid="uid://bkq6fn85wxvwq" path="res://map/assets/eastern_atlas.png" id="1_s17kk"]
+[ext_resource type="PackedScene" uid="uid://r6tccf1wwidy" path="res://component/resource_node.tscn" id="2_fsde4"]
+[ext_resource type="Resource" uid="uid://msnkq2icrcvy" path="res://items/resources/log.tres" id="4_uifcx"]
+[ext_resource type="Resource" uid="uid://cd68ah3eokgta" path="res://items/resources/stick.tres" id="5_l88ff"]
+[ext_resource type="Script" path="res://component/resource_node_item.gd" id="6_6vlao"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3cshh"]
+size = Vector2(10, 11)
+
+[sub_resource type="Resource" id="Resource_whua0"]
+script = ExtResource("6_6vlao")
+item = ExtResource("5_l88ff")
+min_produced = 2
+max_produced = 5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mun6p"]
+radius = 11.0454
+
+[node name="MapleTree" type="Node2D"]
+position = Vector2(0, 5)
+script = ExtResource("1_3f842")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_s17kk")
+offset = Vector2(0, -14)
+region_enabled = true
+region_rect = Rect2(48, 288, 32, 32)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_3cshh")
+
+[node name="ResourceNode" parent="." instance=ExtResource("2_fsde4")]
+required_collection_strength = 1
+dropped_item = ExtResource("4_uifcx")
+item_count = 6
+base_time_to_collect = 5.0
+secondary_items = Array[ExtResource("6_6vlao")]([SubResource("Resource_whua0")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ResourceNode"]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_mun6p")
+debug_color = Color(0.87451, 0.333333, 0.270588, 0.419608)
+
+[connection signal="resource_created" from="ResourceNode" to="." method="create_instance"]
+[connection signal="resources_depleted" from="ResourceNode" to="." method="remove"]

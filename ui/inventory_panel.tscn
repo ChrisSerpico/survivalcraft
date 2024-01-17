@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://5tiuvfleto82"]
+
+[ext_resource type="Script" path="res://ui/inventory_panel.gd" id="1_bsedp"]
+[ext_resource type="PackedScene" uid="uid://ce871seubn2p2" path="res://ui/inventory_slot_display.tscn" id="1_qkrpe"]
+
+[node name="InventoryPanel" type="PanelContainer"]
+script = ExtResource("1_bsedp")
+inventory_slot_display = ExtResource("1_qkrpe")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HFlowContainer" type="HFlowContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+theme_override_constants/v_separation = 8
+alignment = 1

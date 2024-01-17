@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://knn51jqrjqpe"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mewnn"]
+radius = 16.0
+
+[node name="PickupRadius" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mewnn")
+debug_color = Color(0.901961, 0.286275, 0.137255, 0.419608)
+
+[node name="SpawnProtectTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="SpawnProtectTimer" to="." method="set_monitoring" binds= [true]]

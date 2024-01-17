@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://msnkq2icrcvy"]
+
+[ext_resource type="Script" path="res://items/item_data.gd" id="1_2uyla"]
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_lm2lw"]
+[ext_resource type="Texture2D" uid="uid://bp6pr5vb688in" path="res://items/assets/log.tres" id="1_q0pbj"]
+
+[resource]
+script = ExtResource("1_2uyla")
+name = "Log"
+image = ExtResource("1_q0pbj")
+stackable = true
+description = "An unrefined piece of wood, straight from the tree."
+dropped_base_scene = ExtResource("1_lm2lw")

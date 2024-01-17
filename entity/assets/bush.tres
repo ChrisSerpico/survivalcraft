@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://o3raaupolh7r"]
+
+[ext_resource type="Texture2D" uid="uid://csd3xxdi1o2bb" path="res://map/assets/dungeon_atlas.png" id="1_owec2"]
+
+[resource]
+atlas = ExtResource("1_owec2")
+region = Rect2(32, 96, 16, 16)

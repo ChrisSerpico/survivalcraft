@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://vwy26x0iq4qy"]
+
+[ext_resource type="Script" path="res://items/item.gd" id="1_a1ada"]
+[ext_resource type="PackedScene" uid="uid://knn51jqrjqpe" path="res://items/pickup_radius.tscn" id="4_uroog"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_027mw"]
+radius = 6.0
+
+[node name="Item" type="RigidBody2D"]
+collision_layer = 4
+script = ExtResource("1_a1ada")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+region_rect = Rect2(240, 944, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_027mw")
+
+[node name="PickupRadius" parent="." instance=ExtResource("4_uroog")]
+
+[connection signal="body_entered" from="PickupRadius" to="." method="pickup_radius_entered"]

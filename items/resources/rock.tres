@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bcm4rn2ifp10q"]
+
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_t7osx"]
+[ext_resource type="Texture2D" uid="uid://0kn2m7ramek1" path="res://items/assets/rock.tres" id="2_ima85"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="3_nji1k"]
+
+[resource]
+script = ExtResource("3_nji1k")
+name = "Rock"
+image = ExtResource("2_ima85")
+stackable = true
+description = "It's a rock."
+dropped_base_scene = ExtResource("1_t7osx")

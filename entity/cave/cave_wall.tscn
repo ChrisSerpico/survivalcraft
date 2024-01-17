@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3 uid="uid://drvdh7pnccfri"]
+
+[ext_resource type="Script" path="res://entity/entity.gd" id="1_e87ew"]
+[ext_resource type="Texture2D" uid="uid://csd3xxdi1o2bb" path="res://map/assets/dungeon_atlas.png" id="1_jj5ab"]
+[ext_resource type="PackedScene" uid="uid://r6tccf1wwidy" path="res://component/resource_node.tscn" id="2_ifpon"]
+[ext_resource type="Resource" uid="uid://cs4wpyjkkgc71" path="res://items/resources/stone.tres" id="3_bj8b1"]
+[ext_resource type="Resource" uid="uid://bcm4rn2ifp10q" path="res://items/resources/rock.tres" id="4_u0cti"]
+[ext_resource type="Script" path="res://component/resource_node_item.gd" id="5_ts1jk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyaw7"]
+size = Vector2(16, 16)
+
+[sub_resource type="Resource" id="Resource_4ond6"]
+script = ExtResource("5_ts1jk")
+item = ExtResource("4_u0cti")
+min_produced = 0
+max_produced = 3
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4lhc"]
+size = Vector2(16, 16)
+
+[node name="Cave Wall" type="Node2D"]
+script = ExtResource("1_e87ew")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_jj5ab")
+region_enabled = true
+region_rect = Rect2(400, 32, 16, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_hyaw7")
+
+[node name="ResourceNode" parent="." instance=ExtResource("2_ifpon")]
+required_collection_strength = 1
+required_collection_type = 2
+dropped_item = ExtResource("3_bj8b1")
+item_count = 3
+base_time_to_collect = 8.0
+secondary_items = Array[ExtResource("5_ts1jk")]([SubResource("Resource_4ond6")])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ResourceNode"]
+shape = SubResource("RectangleShape2D_i4lhc")
+debug_color = Color(0.984314, 0, 0.333333, 0.419608)
+
+[connection signal="resource_created" from="ResourceNode" to="." method="create_instance"]
+[connection signal="resources_depleted" from="ResourceNode" to="." method="remove"]

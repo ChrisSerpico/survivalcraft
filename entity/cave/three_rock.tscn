@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4ahfhekqnx6x"]
+
+[ext_resource type="Script" path="res://entity/entity.gd" id="1_hyxsr"]
+[ext_resource type="Texture2D" uid="uid://dm7if5vxyiq7k" path="res://entity/assets/three_rock.tres" id="2_4hu0a"]
+[ext_resource type="PackedScene" uid="uid://r6tccf1wwidy" path="res://component/resource_node.tscn" id="3_gk5lk"]
+[ext_resource type="Resource" uid="uid://bcm4rn2ifp10q" path="res://items/resources/rock.tres" id="4_tkjme"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mun6p"]
+radius = 8.0
+
+[node name="GrasslandRock" type="Node2D"]
+script = ExtResource("1_hyxsr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 6)
+texture = ExtResource("2_4hu0a")
+offset = Vector2(0, -6)
+region_rect = Rect2(64, 160, 16, 16)
+
+[node name="ResourceNode" parent="." instance=ExtResource("3_gk5lk")]
+dropped_item = ExtResource("4_tkjme")
+item_count = 3
+base_time_to_collect = 4.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ResourceNode"]
+shape = SubResource("CircleShape2D_mun6p")
+debug_color = Color(0.87451, 0.333333, 0.270588, 0.419608)
+
+[connection signal="resource_created" from="ResourceNode" to="." method="create_instance"]
+[connection signal="resources_depleted" from="ResourceNode" to="." method="remove"]

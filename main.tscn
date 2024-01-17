@@ -1,0 +1,265 @@
+[gd_scene load_steps=13 format=3 uid="uid://31wti5s0o1mh"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_66gbd"]
+[ext_resource type="Script" path="res://player/player_camera.gd" id="1_imwk0"]
+[ext_resource type="PackedScene" uid="uid://bvr42052hcfky" path="res://map/map.tscn" id="1_vh020"]
+[ext_resource type="PackedScene" uid="uid://dsuxj5tk61781" path="res://player/player.tscn" id="3_jsy6t"]
+[ext_resource type="Texture2D" uid="uid://c2tqxxlemsgu8" path="res://player/assets/previews/character01_preview.tres" id="5_21vsx"]
+[ext_resource type="PackedScene" uid="uid://5tiuvfleto82" path="res://ui/inventory_panel.tscn" id="5_qphmv"]
+[ext_resource type="Texture2D" uid="uid://fatddl26hdia" path="res://player/assets/previews/character02_preview.tres" id="6_uarvs"]
+[ext_resource type="PackedScene" uid="uid://wviovmg6oqis" path="res://ui/item_tooltip.tscn" id="7_3ruep"]
+[ext_resource type="Texture2D" uid="uid://cnohjchaxs1r1" path="res://player/assets/previews/character03_preview.tres" id="7_h23bh"]
+[ext_resource type="Texture2D" uid="uid://bnv5pdnvpx25m" path="res://player/assets/previews/character04_preview.tres" id="8_ecsaq"]
+[ext_resource type="PackedScene" uid="uid://c3jrufvytiisi" path="res://ui/crafting/crafting_panel.tscn" id="9_36d20"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qb055"]
+
+[node name="Main" type="Node" groups=["main"]]
+script = ExtResource("1_66gbd")
+player_scene = ExtResource("3_jsy6t")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+script = ExtResource("1_imwk0")
+
+[node name="Map" parent="." instance=ExtResource("1_vh020")]
+y_sort_enabled = true
+layer_0/z_index = -1
+
+[node name="ControlLayer" type="CanvasLayer" parent="."]
+
+[node name="NewGameMenu" type="PanelContainer" parent="ControlLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.0
+offset_top = -123.0
+offset_right = 187.0
+offset_bottom = 123.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlLayer/NewGameMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlLayer/NewGameMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Survivalcraft"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 80)
+layout_mode = 2
+texture = ExtResource("5_21vsx")
+
+[node name="TextureRect2" type="TextureRect" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 80)
+layout_mode = 2
+texture = ExtResource("6_uarvs")
+
+[node name="TextureRect3" type="TextureRect" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 80)
+layout_mode = 2
+texture = ExtResource("7_h23bh")
+
+[node name="TextureRect4" type="TextureRect" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 80)
+layout_mode = 2
+texture = ExtResource("8_ecsaq")
+
+[node name="Title2" type="Label" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Character Select"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator3" type="HSeparator" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SeedInputContainer" type="HBoxContainer" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/SeedInputContainer"]
+layout_mode = 2
+text = "Map Seed (0 for random): "
+
+[node name="SeedInput" type="SpinBox" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/SeedInputContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+rounded = true
+allow_greater = true
+select_all_on_focus = true
+
+[node name="MapSizeInputs" type="HBoxContainer" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/MapSizeInputs"]
+layout_mode = 2
+text = "Map Size: "
+
+[node name="Width" type="SpinBox" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/MapSizeInputs"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 16.0
+max_value = 4096.0
+value = 256.0
+rounded = true
+alignment = 1
+suffix = "width"
+select_all_on_focus = true
+
+[node name="Height" type="SpinBox" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/MapSizeInputs"]
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 16.0
+max_value = 4096.0
+value = 256.0
+rounded = true
+alignment = 1
+suffix = "height"
+select_all_on_focus = true
+
+[node name="NewGameButton" type="Button" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="HSeparator2" type="HSeparator" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="ExitGameButton" type="Button" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"RedButton"
+text = "Exit Game"
+
+[node name="LoadingPanel" type="PanelContainer" parent="ControlLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -94.0
+offset_top = -29.0
+offset_right = 94.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="ControlLayer/LoadingPanel"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Loading..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseMenu" type="PanelContainer" parent="ControlLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -187.0
+offset_top = -78.0
+offset_right = 187.0
+offset_bottom = 78.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ControlLayer/PauseMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlLayer/PauseMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Title" type="Label" parent="ControlLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "System Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="ControlLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MainMenuButton" type="Button" parent="ControlLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return to Main Menu"
+
+[node name="PauseExitButton" type="Button" parent="ControlLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"RedButton"
+text = "Exit Game"
+
+[node name="InventoryDisplay" type="MarginContainer" parent="ControlLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -140.0
+offset_top = -104.0
+offset_right = 140.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlLayer/InventoryDisplay"]
+layout_mode = 2
+alignment = 2
+
+[node name="CraftingPanel" parent="ControlLayer/InventoryDisplay/VBoxContainer" instance=ExtResource("9_36d20")]
+visible = false
+layout_mode = 2
+
+[node name="PlayerInventory" parent="ControlLayer/InventoryDisplay/VBoxContainer" node_paths=PackedStringArray("item_tooltip") instance=ExtResource("5_qphmv")]
+visible = false
+layout_mode = 2
+item_tooltip = NodePath("../../../ItemTooltip")
+
+[node name="HSeparator" type="HSeparator" parent="ControlLayer/InventoryDisplay/VBoxContainer"]
+visible = false
+layout_mode = 2
+
+[node name="EquipSlots" parent="ControlLayer/InventoryDisplay/VBoxContainer" node_paths=PackedStringArray("item_tooltip") instance=ExtResource("5_qphmv")]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_qb055")
+item_tooltip = NodePath("../../../ItemTooltip")
+
+[node name="ItemTooltip" parent="ControlLayer" instance=ExtResource("7_3ruep")]
+visible = false
+
+[connection signal="generation_finished" from="Map" to="." method="spawn_player"]
+[connection signal="pressed" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/NewGameButton" to="." method="start_new_game"]
+[connection signal="pressed" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/ExitGameButton" to="." method="exit_game"]
+[connection signal="pressed" from="ControlLayer/PauseMenu/MarginContainer/VBoxContainer/MainMenuButton" to="." method="return_to_main_menu"]
+[connection signal="pressed" from="ControlLayer/PauseMenu/MarginContainer/VBoxContainer/PauseExitButton" to="." method="exit_game"]
+[connection signal="item_hovered" from="ControlLayer/InventoryDisplay/VBoxContainer/CraftingPanel" to="ControlLayer/ItemTooltip" method="show_item"]
+[connection signal="item_unhovered" from="ControlLayer/InventoryDisplay/VBoxContainer/CraftingPanel" to="ControlLayer/ItemTooltip" method="hide_display"]

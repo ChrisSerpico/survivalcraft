@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cd68ah3eokgta"]
+
+[ext_resource type="Texture2D" uid="uid://b02mfixgax6bv" path="res://items/assets/stick.tres" id="1_0uj3i"]
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_gfg4n"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="1_yqch8"]
+
+[resource]
+script = ExtResource("1_yqch8")
+name = "Stick"
+image = ExtResource("1_0uj3i")
+stackable = true
+description = "The noble stick. A foundation upon which countless multitudes have survived and crafted. "
+dropped_base_scene = ExtResource("1_gfg4n")

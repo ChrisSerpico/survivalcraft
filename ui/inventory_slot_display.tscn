@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce871seubn2p2"]
+
+[ext_resource type="Script" path="res://ui/inventory_slot_display.gd" id="1_rsmil"]
+
+[node name="InventorySlot" type="PanelContainer"]
+script = ExtResource("1_rsmil")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 1
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[connection signal="mouse_entered" from="." to="." method="show_tooltip"]
+[connection signal="mouse_exited" from="." to="." method="hide_tooltip"]

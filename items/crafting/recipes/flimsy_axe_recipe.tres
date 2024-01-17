@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=9 format=3 uid="uid://d1nc3vmxxa0ol"]
+
+[ext_resource type="Script" path="res://items/crafting/recipe_data.gd" id="1_bcivu"]
+[ext_resource type="Resource" uid="uid://cd68ah3eokgta" path="res://items/resources/stick.tres" id="1_gfp6o"]
+[ext_resource type="Script" path="res://items/crafting/recipe_item.gd" id="2_ug40n"]
+[ext_resource type="Resource" uid="uid://bcm4rn2ifp10q" path="res://items/resources/rock.tres" id="3_lk8tt"]
+[ext_resource type="Resource" uid="uid://b8qm0qrvgulu3" path="res://items/resources/tools/axes/flimsy_axe.tres" id="4_2c36r"]
+
+[sub_resource type="Resource" id="Resource_7ikyx"]
+script = ExtResource("2_ug40n")
+item_data = ExtResource("1_gfp6o")
+count = 2
+
+[sub_resource type="Resource" id="Resource_gm57c"]
+script = ExtResource("2_ug40n")
+item_data = ExtResource("3_lk8tt")
+count = 1
+
+[sub_resource type="Resource" id="Resource_vmo47"]
+script = ExtResource("2_ug40n")
+item_data = ExtResource("4_2c36r")
+count = 1
+
+[resource]
+script = ExtResource("1_bcivu")
+recipe_name = "Flimsy Axe"
+inputs = Array[ExtResource("2_ug40n")]([SubResource("Resource_7ikyx"), SubResource("Resource_gm57c")])
+output = SubResource("Resource_vmo47")

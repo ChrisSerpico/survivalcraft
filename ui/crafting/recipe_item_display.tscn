@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7mnuxicf81eq"]
+
+[ext_resource type="Script" path="res://ui/crafting/recipe_item_display.gd" id="1_jm8l2"]
+
+[node name="RecipeItemDisplay" type="VBoxContainer"]
+theme_override_constants/separation = -8
+script = ExtResource("1_jm8l2")
+
+[node name="ItemImage" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="CountDisplay" type="Label" parent="."]
+layout_mode = 2
+horizontal_alignment = 1
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

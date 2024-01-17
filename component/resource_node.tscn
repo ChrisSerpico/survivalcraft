@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://r6tccf1wwidy"]
+
+[ext_resource type="Script" path="res://component/resource_node.gd" id="1_c3ah7"]
+[ext_resource type="PackedScene" uid="uid://bi7qs4p3vwfiw" path="res://ui/progress_bar/progress_bar.tscn" id="2_0dmpx"]
+
+[node name="ResourceNode" type="Area2D"]
+collision_layer = 8
+script = ExtResource("1_c3ah7")
+progress_bar_scene = ExtResource("2_0dmpx")
+base_time_to_collect = 1.0
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
