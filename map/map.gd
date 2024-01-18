@@ -18,7 +18,7 @@ enum BaseTerrain {
 @export var grass_scenes: Array[MapScene]
 @export var forest_scenes: Array[MapScene]
 @export var cave_scenes: Array[MapScene]
-@export var cave_wall_scene: PackedScene
+@export var cave_wall_scenes: Array[MapScene]
 
 @export var noise: FastNoiseLite
 @export var cave_noise: FastNoiseLite
@@ -62,7 +62,7 @@ func generate_map(width: int, height: int, x_offset: int = 0, y_offset: int = 0)
 	
 	generate_scenes(cells[BaseTerrain.GRASS], grass_scenes)
 	generate_scenes(cells[BaseTerrain.FOREST], forest_scenes)
-	generate_cave_scenes(cells[BaseTerrain.CAVE], cave_scenes, cave_wall_scene)
+	generate_cave_scenes(cells[BaseTerrain.CAVE], cave_scenes, cave_wall_scenes)
 	
 	generation_finished.emit()
 
@@ -75,8 +75,9 @@ func generate_scenes(cells: Array[Vector2i], map_scenes: Array[MapScene]):
 		generate_scene_at_position(map_scenes, total_weight, cell_position)
 
 
-func generate_cave_scenes(cells: Array[Vector2i], map_scenes: Array[MapScene], wall_scene: PackedScene):
+func generate_cave_scenes(cells: Array[Vector2i], map_scenes: Array[MapScene], wall_scenes: Array[MapScene]):
 	var total_weight = get_total_weight(map_scenes)
+	var total_wall_weight = get_total_weight(wall_scenes)
 	
 	for cell in cells:
 		var cell_position = map_to_local(cell)
@@ -84,7 +85,7 @@ func generate_cave_scenes(cells: Array[Vector2i], map_scenes: Array[MapScene], w
 		if cave_noise.get_noise_2d(cell_position.x, cell_position.y) > 0.22:
 			generate_scene_at_position(map_scenes, total_weight, cell_position)
 		else:
-			instantiate_scene_at_position(wall_scene, cell_position)
+			generate_scene_at_position(wall_scenes, total_wall_weight, cell_position)
 
 
 func get_total_weight(scene_list: Array[MapScene]) -> int:
@@ -123,8 +124,10 @@ func clear_map():
 
 func update_seed(new_seed: int = 0):
 	if new_seed == 0:
+		randomize()
 		noise.seed = randi()
 	else:
+		seed(new_seed)
 		noise.seed = new_seed
 	
 	cave_noise.seed = noise.seed + 1

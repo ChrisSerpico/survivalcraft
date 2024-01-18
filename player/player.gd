@@ -104,11 +104,12 @@ func pick_up(item: Item) -> bool:
 
 
 func craft_recipe(recipe: RecipeData):
-	var dropped_item_scene = inventory.craft_item(recipe)
+	var dropped_item_scenes = inventory.craft_item(recipe) as Array[Item]
 	
-	if dropped_item_scene != null:
-		dropped_item_scene.position = position
-		add_sibling(dropped_item_scene)
+	if not dropped_item_scenes.is_empty():
+		for scene in dropped_item_scenes:
+			scene.position = position
+			add_sibling(scene)
 
 
 func handle_tile_effects():

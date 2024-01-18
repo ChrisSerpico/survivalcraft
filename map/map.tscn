@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bvr42052hcfky"]
+[gd_scene load_steps=41 format=3 uid="uid://bvr42052hcfky"]
 
 [ext_resource type="Script" path="res://map/map.gd" id="3_sqo6o"]
 [ext_resource type="Texture2D" uid="uid://drqqqwcqoxjde" path="res://map/assets/exterior_atlas.png" id="4_5e3sk"]
@@ -15,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://ckjkd212lxecv" path="res://entity/forest/oak_tree.tscn" id="11_pixnk"]
 [ext_resource type="PackedScene" uid="uid://dx1hhu4mlvfqt" path="res://entity/forest/bush.tscn" id="12_m7f5i"]
 [ext_resource type="PackedScene" uid="uid://c4ahfhekqnx6x" path="res://entity/cave/three_rock.tscn" id="14_53rk8"]
+[ext_resource type="PackedScene" uid="uid://xi2yxokovomc" path="res://entity/cave/iron_ore_wall.tscn" id="16_quc5v"]
+[ext_resource type="PackedScene" uid="uid://mr8qxdr654hf" path="res://entity/cave/gold_ore_wall.tscn" id="17_nwgnp"]
+[ext_resource type="PackedScene" uid="uid://dxrqn3arlyj6o" path="res://entity/cave/sapphire_gem_wall.tscn" id="18_dae6e"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3f5pi"]
 texture = ExtResource("4_5e3sk")
@@ -394,6 +397,26 @@ script = ExtResource("5_cgppm")
 scene = ExtResource("14_53rk8")
 weight = 15
 
+[sub_resource type="Resource" id="Resource_w1klh"]
+script = ExtResource("5_cgppm")
+scene = ExtResource("10_lvyxi")
+weight = 2000
+
+[sub_resource type="Resource" id="Resource_2cxnm"]
+script = ExtResource("5_cgppm")
+scene = ExtResource("16_quc5v")
+weight = 50
+
+[sub_resource type="Resource" id="Resource_2coht"]
+script = ExtResource("5_cgppm")
+scene = ExtResource("17_nwgnp")
+weight = 5
+
+[sub_resource type="Resource" id="Resource_cyln4"]
+script = ExtResource("5_cgppm")
+scene = ExtResource("18_dae6e")
+weight = 2
+
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_2mwpj"]
 noise_type = 5
 fractal_octaves = 3
@@ -414,6 +437,6 @@ script = ExtResource("3_sqo6o")
 grass_scenes = Array[ExtResource("5_cgppm")]([SubResource("Resource_5tx2u"), SubResource("Resource_6dgr7"), SubResource("Resource_yy54m"), SubResource("Resource_2p8nv")])
 forest_scenes = Array[ExtResource("5_cgppm")]([SubResource("Resource_kirem"), SubResource("Resource_2dhit"), SubResource("Resource_374bs"), SubResource("Resource_2b3d8")])
 cave_scenes = Array[ExtResource("5_cgppm")]([SubResource("Resource_iyxvn"), SubResource("Resource_ucbcx")])
-cave_wall_scene = ExtResource("10_lvyxi")
+cave_wall_scenes = Array[ExtResource("5_cgppm")]([SubResource("Resource_w1klh"), SubResource("Resource_2cxnm"), SubResource("Resource_2coht"), SubResource("Resource_cyln4")])
 noise = SubResource("FastNoiseLite_2mwpj")
 cave_noise = SubResource("FastNoiseLite_sm2g5")

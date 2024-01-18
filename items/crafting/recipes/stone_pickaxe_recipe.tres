@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=9 format=3 uid="uid://bj27qegtqyhmt"]
+
+[ext_resource type="Resource" uid="uid://cd6kg3figgtvy" path="res://items/resources/crafting/handle.tres" id="1_m0fpp"]
+[ext_resource type="Script" path="res://items/crafting/recipe_item.gd" id="2_85xxa"]
+[ext_resource type="Resource" uid="uid://cs4wpyjkkgc71" path="res://items/resources/stone.tres" id="3_uancf"]
+[ext_resource type="Resource" uid="uid://pcw3sylcgbl1" path="res://items/resources/tools/picks/stone_pick.tres" id="4_bbx5n"]
+[ext_resource type="Script" path="res://items/crafting/recipe_data.gd" id="5_b1b6t"]
+
+[sub_resource type="Resource" id="Resource_7ikyx"]
+script = ExtResource("2_85xxa")
+item_data = ExtResource("1_m0fpp")
+count = 1
+
+[sub_resource type="Resource" id="Resource_gm57c"]
+script = ExtResource("2_85xxa")
+item_data = ExtResource("3_uancf")
+count = 3
+
+[sub_resource type="Resource" id="Resource_vmo47"]
+script = ExtResource("2_85xxa")
+item_data = ExtResource("4_bbx5n")
+count = 1
+
+[resource]
+script = ExtResource("5_b1b6t")
+recipe_name = "Stone Pickaxe"
+inputs = Array[ExtResource("2_85xxa")]([SubResource("Resource_7ikyx"), SubResource("Resource_gm57c")])
+output = SubResource("Resource_vmo47")

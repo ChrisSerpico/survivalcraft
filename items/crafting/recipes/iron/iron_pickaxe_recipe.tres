@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=9 format=3 uid="uid://dxaqbkkgik7h"]
+
+[ext_resource type="Resource" uid="uid://cd6kg3figgtvy" path="res://items/resources/crafting/handle.tres" id="1_kdyep"]
+[ext_resource type="Script" path="res://items/crafting/recipe_item.gd" id="2_acrcd"]
+[ext_resource type="Resource" uid="uid://bikyw3sle0lx6" path="res://items/resources/bars/iron_bar.tres" id="3_wwqh4"]
+[ext_resource type="Resource" uid="uid://b0svgjda01y43" path="res://items/resources/tools/picks/iron_pick.tres" id="4_y5dvh"]
+[ext_resource type="Script" path="res://items/crafting/recipe_data.gd" id="5_2bfme"]
+
+[sub_resource type="Resource" id="Resource_nfawb"]
+script = ExtResource("2_acrcd")
+item_data = ExtResource("1_kdyep")
+count = 1
+
+[sub_resource type="Resource" id="Resource_46w1r"]
+script = ExtResource("2_acrcd")
+item_data = ExtResource("3_wwqh4")
+count = 3
+
+[sub_resource type="Resource" id="Resource_4ddtl"]
+script = ExtResource("2_acrcd")
+item_data = ExtResource("4_y5dvh")
+count = 1
+
+[resource]
+script = ExtResource("5_2bfme")
+recipe_name = "Iron Pickaxe"
+inputs = Array[ExtResource("2_acrcd")]([SubResource("Resource_nfawb"), SubResource("Resource_46w1r")])
+output = SubResource("Resource_4ddtl")

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://b0svgjda01y43"]
+
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_j14ag"]
+[ext_resource type="Texture2D" uid="uid://bjoe4eo76frkb" path="res://items/assets/tools/iron_pick.tres" id="2_g7rg1"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="3_hbcxk"]
+
+[resource]
+script = ExtResource("3_hbcxk")
+name = "Iron Pickaxe"
+image = ExtResource("2_g7rg1")
+stackable = false
+description = "A finely crafted iron pickaxe. With this, no mundane rock could stand against you."
+dropped_base_scene = ExtResource("1_j14ag")
+collection_strength = 2
+collection_types = Array[int]([2])
+collection_speed_mod = 4.0
+base_damage = 1

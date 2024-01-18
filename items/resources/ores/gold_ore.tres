@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c7nlqmlty4juq"]
+
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_d1emc"]
+[ext_resource type="Texture2D" uid="uid://bawdrycbxanef" path="res://items/assets/core_resources/gold_ore.tres" id="2_3xlrs"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="3_sfoqf"]
+
+[resource]
+script = ExtResource("3_sfoqf")
+name = "Gold Ore"
+image = ExtResource("2_3xlrs")
+stackable = true
+description = "Legendarily durable and uniquely valuable. This shine won't fade."
+dropped_base_scene = ExtResource("1_d1emc")
+collection_strength = 0
+collection_types = Array[int]([])
+collection_speed_mod = 1.0
+base_damage = 1

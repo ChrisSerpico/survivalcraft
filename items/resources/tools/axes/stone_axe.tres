@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://btpdl17n1ucjm"]
+
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_lgprd"]
+[ext_resource type="Texture2D" uid="uid://bcb133xqk5npx" path="res://items/assets/stone_axe.tres" id="2_iecfp"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="3_flbdi"]
+
+[resource]
+script = ExtResource("3_flbdi")
+name = "Stone Axe"
+image = ExtResource("2_iecfp")
+stackable = false
+description = "A sturdy axe made from carefully worked stone slabs."
+dropped_base_scene = ExtResource("1_lgprd")
+collection_strength = 1
+collection_types = Array[int]([1])
+collection_speed_mod = 2.0
+base_damage = 1

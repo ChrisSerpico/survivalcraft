@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cnom06if40w8v"]
+
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_og22x"]
+[ext_resource type="Texture2D" uid="uid://bd6fqw8s75k" path="res://items/assets/core_resources/sapphire.tres" id="2_onujm"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="3_4mk1r"]
+
+[resource]
+script = ExtResource("3_4mk1r")
+name = "Sapphire"
+image = ExtResource("2_onujm")
+stackable = true
+description = "A prefectly formed gem whose beauty is only matched by its rarity. Surely this can be used for something? "
+dropped_base_scene = ExtResource("1_og22x")
+collection_strength = 0
+collection_types = Array[int]([])
+collection_speed_mod = 1.0
+base_damage = 1

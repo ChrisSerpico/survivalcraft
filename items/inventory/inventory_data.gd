@@ -72,9 +72,9 @@ func has_item_count(item: ItemData, count: int):
 	return get_total(item) >= count
 
 
-func craft_item(recipe: RecipeData) -> Item:
+func craft_item(recipe: RecipeData) -> Array[Item]:
 	if not can_craft(recipe):
-		return
+		return []
 	
 	for input_item in recipe.inputs:
 		var to_remove = input_item.count
@@ -85,11 +85,16 @@ func craft_item(recipe: RecipeData) -> Item:
 			
 			if to_remove <= 0:
 				break
+	
+	var leftovers = [] as Array[Item]
+	
+	for i in range(recipe.output.count):
+		var added = add_item_from_data(recipe.output.item_data)
 		
-	if add_item_from_data(recipe.output.item_data):
-		return null
-	else:
-		return recipe.output.item_data.get_scene_instance()
+		if not added:
+			leftovers.append(recipe.output.item_data.get_scene_instance())
+	
+	return leftovers
 
 
 func _on_slot_updated(_slot: SlotData):

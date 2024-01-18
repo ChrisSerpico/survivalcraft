@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c3t6wp328d2qw"]
+
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_fxyxq"]
+[ext_resource type="Texture2D" uid="uid://dvo4gwkfqw0ax" path="res://items/assets/core_resources/gold_bar.tres" id="2_311po"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="3_jahur"]
+
+[resource]
+script = ExtResource("3_jahur")
+name = "Gold Bar"
+image = ExtResource("2_311po")
+stackable = true
+description = "A solid bar of gold. If you make enough of these, you can begin issuing debt and found a new nation-state."
+dropped_base_scene = ExtResource("1_fxyxq")
+collection_strength = 0
+collection_types = Array[int]([])
+collection_speed_mod = 1.0
+base_damage = 1

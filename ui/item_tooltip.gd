@@ -42,10 +42,10 @@ func get_item_stat_string(item: ItemData) -> String:
 	var stat_desc = ""
 	
 	if item.base_damage > 1:
-		stat_desc += "Damage: " + str(item.base_damage)
+		stat_desc += "Damage: " + str(item.base_damage) + "\n"
 	if item.collection_strength != ResourceNode.CollectionStrength.NONE:
-		stat_desc += "Tool Level: " + ResourceNode.CollectionStrength.keys()[item.collection_strength].capitalize()
+		stat_desc += "Tool Level: " + ResourceNode.CollectionStrength.keys()[item.collection_strength].capitalize() + "\n"
 	if item.collection_speed_mod != 1:
-		stat_desc += "Collection Speed: " + str(item.collection_speed_mod)
+		stat_desc += "Collection Speed: " + str(item.collection_speed_mod) + "\n"
 	
 	return stat_desc

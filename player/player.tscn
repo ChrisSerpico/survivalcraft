@@ -1,10 +1,17 @@
-[gd_scene load_steps=21 format=3 uid="uid://dsuxj5tk61781"]
+[gd_scene load_steps=28 format=3 uid="uid://dsuxj5tk61781"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_rrvlu"]
 [ext_resource type="Resource" uid="uid://d1nc3vmxxa0ol" path="res://items/crafting/recipes/flimsy_axe_recipe.tres" id="2_5bvt7"]
 [ext_resource type="Texture2D" uid="uid://bv46wtyfajcni" path="res://player/assets/character01.tres" id="2_eom72"]
 [ext_resource type="Resource" uid="uid://d1id0ydd8p3jw" path="res://items/crafting/recipes/flimsy_pickaxe_recipe.tres" id="3_0qxty"]
 [ext_resource type="Script" path="res://player/player_sprite.gd" id="3_db32s"]
+[ext_resource type="Resource" uid="uid://dykj1ornjwkxb" path="res://items/crafting/recipes/handle_recipe.tres" id="4_e5off"]
+[ext_resource type="Resource" uid="uid://t64c7antctll" path="res://items/crafting/recipes/stone_axe_recipe.tres" id="5_t2rab"]
+[ext_resource type="Resource" uid="uid://bj27qegtqyhmt" path="res://items/crafting/recipes/stone_pickaxe_recipe.tres" id="6_27a6x"]
+[ext_resource type="Resource" uid="uid://dyoqvpreo4t1e" path="res://items/crafting/recipes/iron/iron_bar_recipe.tres" id="7_s6ojp"]
+[ext_resource type="Resource" uid="uid://biby6cdmehnts" path="res://items/crafting/recipes/iron/iron_axe_recipe.tres" id="8_jt6i6"]
+[ext_resource type="Resource" uid="uid://dxaqbkkgik7h" path="res://items/crafting/recipes/iron/iron_pickaxe_recipe.tres" id="9_o0bnd"]
+[ext_resource type="Resource" uid="uid://cmv7l43650bgb" path="res://items/crafting/recipes/gold/gold_bar_recipe.tres" id="10_2q06b"]
 
 [sub_resource type="Animation" id="Animation_p71mm"]
 length = 0.001
@@ -258,7 +265,7 @@ script = ExtResource("1_rrvlu")
 interaction_range = 20.0
 inventory_size = 8
 equipment_size = 4
-known_recipes = Array[Resource("res://items/crafting/recipe_data.gd")]([ExtResource("2_5bvt7"), ExtResource("3_0qxty")])
+known_recipes = Array[Resource("res://items/crafting/recipe_data.gd")]([ExtResource("2_5bvt7"), ExtResource("3_0qxty"), ExtResource("4_e5off"), ExtResource("5_t2rab"), ExtResource("6_27a6x"), ExtResource("7_s6ojp"), ExtResource("8_jt6i6"), ExtResource("9_o0bnd"), ExtResource("10_2q06b")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2

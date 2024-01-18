@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://pcw3sylcgbl1"]
+
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_p673k"]
+[ext_resource type="Texture2D" uid="uid://d3cdws0t3wdg6" path="res://items/assets/stone_pick.tres" id="2_dnj2b"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="3_7kc0r"]
+
+[resource]
+script = ExtResource("3_7kc0r")
+name = "Stone Pickaxe"
+image = ExtResource("2_dnj2b")
+stackable = false
+description = "A sturdy pickaxe made from carefully worked stone slabs."
+dropped_base_scene = ExtResource("1_p673k")
+collection_strength = 1
+collection_types = Array[int]([2])
+collection_speed_mod = 2.0
+base_damage = 1

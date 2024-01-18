@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cbihbp1vgwvsd"]
+
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_3hovh"]
+[ext_resource type="Texture2D" uid="uid://d2aoy7o0ocx7m" path="res://items/assets/core_resources/iron_ore.tres" id="2_kfr0i"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="3_jq8e4"]
+
+[resource]
+script = ExtResource("3_jq8e4")
+name = "Iron Ore"
+image = ExtResource("2_kfr0i")
+stackable = true
+description = "Unrefined iron ore. Useful when smelted, not so much when raw."
+dropped_base_scene = ExtResource("1_3hovh")
+collection_strength = 0
+collection_types = Array[int]([])
+collection_speed_mod = 1.0
+base_damage = 1

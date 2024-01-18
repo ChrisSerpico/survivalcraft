@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=7 format=3 uid="uid://cmv7l43650bgb"]
+
+[ext_resource type="Resource" uid="uid://c7nlqmlty4juq" path="res://items/resources/ores/gold_ore.tres" id="1_bn3t0"]
+[ext_resource type="Script" path="res://items/crafting/recipe_item.gd" id="2_28nhv"]
+[ext_resource type="Resource" uid="uid://c3t6wp328d2qw" path="res://items/resources/bars/gold_bar.tres" id="3_8ncsk"]
+[ext_resource type="Script" path="res://items/crafting/recipe_data.gd" id="4_qrkm2"]
+
+[sub_resource type="Resource" id="Resource_wfxvh"]
+script = ExtResource("2_28nhv")
+item_data = ExtResource("1_bn3t0")
+count = 1
+
+[sub_resource type="Resource" id="Resource_lji0o"]
+script = ExtResource("2_28nhv")
+item_data = ExtResource("3_8ncsk")
+count = 1
+
+[resource]
+script = ExtResource("4_qrkm2")
+recipe_name = "Gold Bar"
+inputs = Array[ExtResource("2_28nhv")]([SubResource("Resource_wfxvh")])
+output = SubResource("Resource_lji0o")

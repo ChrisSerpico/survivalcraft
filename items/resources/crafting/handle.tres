@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://cd6kg3figgtvy"]
+
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_ocsrp"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="1_vvm3i"]
+[ext_resource type="Texture2D" uid="uid://bplfmdvkbhkcx" path="res://items/assets/handle.tres" id="2_ke0be"]
+
+[resource]
+script = ExtResource("1_vvm3i")
+name = "Wooden Handle"
+image = ExtResource("2_ke0be")
+stackable = true
+description = "A sturdy wooden handle, fashioned from a log. Can be used to create several different tools. "
+dropped_base_scene = ExtResource("1_ocsrp")
+collection_strength = 0
+collection_types = Array[int]([])
+collection_speed_mod = 1.0
+base_damage = 1

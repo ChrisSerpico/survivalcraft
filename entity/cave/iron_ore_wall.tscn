@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://xi2yxokovomc"]
+
+[ext_resource type="Script" path="res://entity/entity.gd" id="1_6fpur"]
+[ext_resource type="Texture2D" uid="uid://csd3xxdi1o2bb" path="res://map/assets/dungeon_atlas.png" id="2_xaxx6"]
+[ext_resource type="PackedScene" uid="uid://r6tccf1wwidy" path="res://component/resource_node.tscn" id="3_anfej"]
+[ext_resource type="Resource" uid="uid://cbihbp1vgwvsd" path="res://items/resources/ores/iron_ore.tres" id="4_udqld"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyaw7"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i4lhc"]
+size = Vector2(16, 16)
+
+[node name="Iron Ore Wall" type="Node2D"]
+script = ExtResource("1_6fpur")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_xaxx6")
+region_enabled = true
+region_rect = Rect2(496, 16, 16, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_hyaw7")
+
+[node name="ResourceNode" parent="." instance=ExtResource("3_anfej")]
+required_collection_strength = 1
+required_collection_type = 2
+dropped_item = ExtResource("4_udqld")
+item_count = 1
+base_time_to_collect = 8.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ResourceNode"]
+shape = SubResource("RectangleShape2D_i4lhc")
+debug_color = Color(0.984314, 0, 0.333333, 0.419608)
+
+[connection signal="resource_created" from="ResourceNode" to="." method="create_instance"]
+[connection signal="resources_depleted" from="ResourceNode" to="." method="remove"]
