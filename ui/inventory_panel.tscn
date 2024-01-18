@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://ce871seubn2p2" path="res://ui/inventory_slot_display.tscn" id="1_qkrpe"]
 
 [node name="InventoryPanel" type="PanelContainer"]
+mouse_filter = 1
 script = ExtResource("1_bsedp")
 inventory_slot_display = ExtResource("1_qkrpe")
 

@@ -21,6 +21,8 @@ var floating_slot: SlotData
 
 @export var known_recipes: Array[RecipeData]
 
+var ejection_speed: float = 350
+
 var in_menu: bool = false
 
 
@@ -43,6 +45,8 @@ func _process(delta):
 		select_slot(active_equipment_index + 1)
 	elif Input.is_action_just_pressed("select_previous"):
 		select_slot(active_equipment_index - 1)
+	if Input.is_action_just_pressed("drop"):
+		drop_active_item()
 	
 	# Movement
 	velocity.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -103,6 +107,19 @@ func pick_up(item: Item) -> bool:
 	return inventory.add_item(item)
 
 
+func drop_active_item():
+	if not active_equipment_slot.is_empty():
+		eject_item(active_equipment_slot.item.get_scene_instance())
+		active_equipment_slot.remove_one()
+
+
+func drop_from_slot(slot: SlotData, count: int):
+	for i in range(count):
+		eject_item(slot.item.get_scene_instance())
+	
+	slot.remove_count(count)
+
+
 func craft_recipe(recipe: RecipeData):
 	var dropped_item_scenes = inventory.craft_item(recipe) as Array[Item]
 	
@@ -110,6 +127,15 @@ func craft_recipe(recipe: RecipeData):
 		for scene in dropped_item_scenes:
 			scene.position = position
 			add_sibling(scene)
+
+
+func eject_item(item: Item):
+	item.position = position
+	add_sibling(item)
+	
+	var mouse_pos = get_global_mouse_position()
+	var angle_to_mouse = position.angle_to_point(mouse_pos)
+	item.apply_central_impulse(Vector2.from_angle(angle_to_mouse).normalized() * ejection_speed)
 
 
 func handle_tile_effects():

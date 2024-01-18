@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://ui/inventory_slot_display.gd" id="1_rsmil"]
 
 [node name="InventorySlot" type="PanelContainer"]
+mouse_filter = 1
 script = ExtResource("1_rsmil")
 
 [node name="TextureRect" type="TextureRect" parent="."]

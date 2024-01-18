@@ -46,11 +46,20 @@ func remove_count(to_remove: int) -> int:
 	return left_to_remove
 
 
+func remove_one() -> int:
+	return remove_count(1)
+
+
+func remove_all() -> int:
+	return remove_count(count)
+
+
 func can_stack(other_item: ItemData):
 	if is_empty():
 		return true
 	
 	return item.stackable and item == other_item and count < stack_limit
+
 
 # TODO: it HAS to be possible to clean up this code lol 
 # Specifically split the other slot code into a different function and

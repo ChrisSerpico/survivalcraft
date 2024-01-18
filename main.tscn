@@ -247,6 +247,7 @@ item_tooltip = NodePath("../../../ItemTooltip")
 [node name="HSeparator" type="HSeparator" parent="ControlLayer/InventoryDisplay/VBoxContainer"]
 visible = false
 layout_mode = 2
+mouse_filter = 2
 
 [node name="EquipSlots" parent="ControlLayer/InventoryDisplay/VBoxContainer" node_paths=PackedStringArray("item_tooltip") instance=ExtResource("5_qphmv")]
 custom_minimum_size = Vector2(350, 0)
@@ -265,5 +266,7 @@ visible = false
 [connection signal="pressed" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/ExitGameButton" to="." method="exit_game"]
 [connection signal="pressed" from="ControlLayer/PauseMenu/MarginContainer/VBoxContainer/MainMenuButton" to="." method="return_to_main_menu"]
 [connection signal="pressed" from="ControlLayer/PauseMenu/MarginContainer/VBoxContainer/PauseExitButton" to="." method="exit_game"]
+[connection signal="mouse_entered" from="ControlLayer/InventoryDisplay" to="ControlLayer/FloatingSlot" method="set_over_inventory"]
+[connection signal="mouse_exited" from="ControlLayer/InventoryDisplay" to="ControlLayer/FloatingSlot" method="set_not_over_inventory"]
 [connection signal="item_hovered" from="ControlLayer/InventoryDisplay/VBoxContainer/CraftingPanel" to="ControlLayer/ItemTooltip" method="show_item"]
 [connection signal="item_unhovered" from="ControlLayer/InventoryDisplay/VBoxContainer/CraftingPanel" to="ControlLayer/ItemTooltip" method="hide_display"]
