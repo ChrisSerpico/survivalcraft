@@ -1,5 +1,6 @@
-[gd_scene load_steps=41 format=3 uid="uid://bvr42052hcfky"]
+[gd_scene load_steps=43 format=3 uid="uid://bvr42052hcfky"]
 
+[ext_resource type="Texture2D" uid="uid://klgkke7xgsvg" path="res://map/assets/lighting/lighting_map.png" id="1_71pp4"]
 [ext_resource type="Script" path="res://map/map.gd" id="3_sqo6o"]
 [ext_resource type="Texture2D" uid="uid://drqqqwcqoxjde" path="res://map/assets/exterior_atlas.png" id="4_5e3sk"]
 [ext_resource type="Script" path="res://map/map_scene.gd" id="5_cgppm"]
@@ -18,6 +19,43 @@
 [ext_resource type="PackedScene" uid="uid://xi2yxokovomc" path="res://entity/cave/iron_ore_wall.tscn" id="16_quc5v"]
 [ext_resource type="PackedScene" uid="uid://mr8qxdr654hf" path="res://entity/cave/gold_ore_wall.tscn" id="17_nwgnp"]
 [ext_resource type="PackedScene" uid="uid://dxrqn3arlyj6o" path="res://entity/cave/sapphire_gem_wall.tscn" id="18_dae6e"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yvff4"]
+texture = ExtResource("1_71pp4")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+2:0/0 = 0
+2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+2:0/0/physics_layer_0/angular_velocity = 0.0
+3:0/0 = 0
+3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+3:0/0/physics_layer_0/angular_velocity = 0.0
+4:0/0 = 0
+4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+4:0/0/physics_layer_0/angular_velocity = 0.0
+5:0/0 = 0
+5:0/0/y_sort_origin = 7
+5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+5:0/0/physics_layer_0/angular_velocity = 0.0
+6:0/0 = 0
+6:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+6:0/0/physics_layer_0/angular_velocity = 0.0
+7:0/0 = 0
+7:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+7:0/0/physics_layer_0/angular_velocity = 0.0
+8:0/0 = 0
+8:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+8:0/0/physics_layer_0/angular_velocity = 0.0
+9:0/0 = 0
+9:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+9:0/0/physics_layer_0/angular_velocity = 0.0
+10:0/0 = 0
+10:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+10:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3f5pi"]
 texture = ExtResource("4_5e3sk")
@@ -280,6 +318,7 @@ texture = ExtResource("7_lxji2")
 20:9/0/terrains_peering_bit/bottom_side = 5
 20:9/0/terrains_peering_bit/left_side = 5
 20:9/0/terrains_peering_bit/top_side = 5
+20:9/0/custom_data_3 = true
 20:9/1 = 1
 20:9/1/flip_h = true
 20:9/1/terrain_set = 0
@@ -291,6 +330,7 @@ texture = ExtResource("7_lxji2")
 20:9/1/terrains_peering_bit/bottom_side = 5
 20:9/1/terrains_peering_bit/left_side = 5
 20:9/1/terrains_peering_bit/top_side = 5
+20:9/1/custom_data_3 = true
 20:9/2 = 2
 20:9/2/flip_v = true
 20:9/2/terrain_set = 0
@@ -302,6 +342,7 @@ texture = ExtResource("7_lxji2")
 20:9/2/terrains_peering_bit/bottom_side = 5
 20:9/2/terrains_peering_bit/left_side = 5
 20:9/2/terrains_peering_bit/top_side = 5
+20:9/2/custom_data_3 = true
 20:9/3 = 3
 20:9/3/transpose = true
 20:9/3/terrain_set = 0
@@ -313,6 +354,7 @@ texture = ExtResource("7_lxji2")
 20:9/3/terrains_peering_bit/bottom_side = 5
 20:9/3/terrains_peering_bit/left_side = 5
 20:9/3/terrains_peering_bit/top_side = 5
+20:9/3/custom_data_3 = true
 21:9/0 = 0
 21:9/0/terrain_set = 0
 21:9/0/terrain = 5
@@ -322,6 +364,7 @@ texture = ExtResource("7_lxji2")
 21:9/0/terrains_peering_bit/bottom_side = 5
 21:9/0/terrains_peering_bit/left_side = 5
 21:9/0/terrains_peering_bit/top_side = 5
+21:9/0/custom_data_3 = true
 
 [sub_resource type="TileSet" id="TileSet_avqrx"]
 physics_layer_0/collision_layer = 1
@@ -344,11 +387,14 @@ custom_data_layer_1/name = "overlay_scale"
 custom_data_layer_1/type = 3
 custom_data_layer_2/name = "speed_mod"
 custom_data_layer_2/type = 3
+custom_data_layer_3/name = "indoors"
+custom_data_layer_3/type = 1
 sources/3 = SubResource("TileSetAtlasSource_3f5pi")
 sources/4 = SubResource("TileSetAtlasSource_yqpvo")
 sources/5 = SubResource("TileSetAtlasSource_keci0")
 sources/6 = SubResource("TileSetAtlasSource_dbf0g")
 sources/7 = SubResource("TileSetAtlasSource_0rryf")
+sources/0 = SubResource("TileSetAtlasSource_yvff4")
 
 [sub_resource type="Resource" id="Resource_5tx2u"]
 script = ExtResource("5_cgppm")
@@ -433,6 +479,9 @@ domain_warp_frequency = 0.66
 tile_set = SubResource("TileSet_avqrx")
 format = 2
 layer_0/name = "base_terrain"
+layer_1/name = "lightmap"
+layer_1/z_index = 1
+layer_1/tile_data = PackedInt32Array()
 script = ExtResource("3_sqo6o")
 grass_scenes = Array[ExtResource("5_cgppm")]([SubResource("Resource_5tx2u"), SubResource("Resource_6dgr7"), SubResource("Resource_yy54m"), SubResource("Resource_2p8nv")])
 forest_scenes = Array[ExtResource("5_cgppm")]([SubResource("Resource_kirem"), SubResource("Resource_2dhit"), SubResource("Resource_374bs"), SubResource("Resource_2b3d8")])

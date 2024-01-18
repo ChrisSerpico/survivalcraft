@@ -19,13 +19,15 @@
 script = ExtResource("1_66gbd")
 player_scene = ExtResource("3_jsy6t")
 
+[node name="World" type="Node2D" parent="."]
+
+[node name="Map" parent="World" instance=ExtResource("1_vh020")]
+y_sort_enabled = true
+layer_0/z_index = -1
+
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(4, 4)
 script = ExtResource("1_imwk0")
-
-[node name="Map" parent="." instance=ExtResource("1_vh020")]
-y_sort_enabled = true
-layer_0/z_index = -1
 
 [node name="ControlLayer" type="CanvasLayer" parent="."]
 
@@ -261,7 +263,7 @@ visible = false
 [node name="FloatingSlot" parent="ControlLayer" instance=ExtResource("12_jw01c")]
 visible = false
 
-[connection signal="generation_finished" from="Map" to="." method="spawn_player"]
+[connection signal="generation_finished" from="World/Map" to="." method="spawn_player"]
 [connection signal="pressed" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/NewGameButton" to="." method="start_new_game"]
 [connection signal="pressed" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/ExitGameButton" to="." method="exit_game"]
 [connection signal="pressed" from="ControlLayer/PauseMenu/MarginContainer/VBoxContainer/MainMenuButton" to="." method="return_to_main_menu"]

@@ -12,7 +12,7 @@ enum GameState {
 
 
 # In-game node refs
-@onready var map: Map = $Map
+@onready var map: Map = $World/Map
 @onready var player_camera: PlayerCamera = $Camera2D
 
 # Control node refs
@@ -45,7 +45,7 @@ var local_player_instance: Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	map.generate_map(72, 36, -36, -18)
+	map.generate_map(40, 24, -20, -12)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
