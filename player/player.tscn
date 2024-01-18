@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dsuxj5tk61781"]
+[gd_scene load_steps=31 format=3 uid="uid://dsuxj5tk61781"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_rrvlu"]
 [ext_resource type="Resource" uid="uid://d1nc3vmxxa0ol" path="res://items/crafting/recipes/flimsy_axe_recipe.tres" id="2_5bvt7"]
@@ -12,6 +12,9 @@
 [ext_resource type="Resource" uid="uid://biby6cdmehnts" path="res://items/crafting/recipes/iron/iron_axe_recipe.tres" id="8_jt6i6"]
 [ext_resource type="Resource" uid="uid://dxaqbkkgik7h" path="res://items/crafting/recipes/iron/iron_pickaxe_recipe.tres" id="9_o0bnd"]
 [ext_resource type="Resource" uid="uid://cmv7l43650bgb" path="res://items/crafting/recipes/gold/gold_bar_recipe.tres" id="10_2q06b"]
+[ext_resource type="Resource" uid="uid://c3t6wp328d2qw" path="res://items/resources/bars/gold_bar.tres" id="11_raqpd"]
+[ext_resource type="Resource" uid="uid://cnom06if40w8v" path="res://items/resources/gems/sapphire.tres" id="12_gi4x0"]
+[ext_resource type="Resource" uid="uid://dsjsr78n6f6p4" path="res://items/crafting/recipes/gold/sapphire_pickaxe_recipe.tres" id="13_m7gfl"]
 
 [sub_resource type="Animation" id="Animation_p71mm"]
 length = 0.001
@@ -266,6 +269,9 @@ interaction_range = 20.0
 inventory_size = 8
 equipment_size = 4
 known_recipes = Array[Resource("res://items/crafting/recipe_data.gd")]([ExtResource("2_5bvt7"), ExtResource("3_0qxty"), ExtResource("4_e5off"), ExtResource("5_t2rab"), ExtResource("6_27a6x"), ExtResource("7_s6ojp"), ExtResource("8_jt6i6"), ExtResource("9_o0bnd"), ExtResource("10_2q06b")])
+gold_bar_data = ExtResource("11_raqpd")
+sapphire_data = ExtResource("12_gi4x0")
+sapphire_pick_recipe = ExtResource("13_m7gfl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2

@@ -36,8 +36,8 @@ shape = SubResource("RectangleShape2D_hyaw7")
 required_collection_strength = 1
 required_collection_type = 2
 dropped_item = ExtResource("3_bj8b1")
-item_count = 3
-base_time_to_collect = 8.0
+item_count = 2
+base_time_to_collect = 6.0
 secondary_items = Array[ExtResource("5_ts1jk")]([SubResource("Resource_4ond6")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ResourceNode"]

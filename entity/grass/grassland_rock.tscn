@@ -40,7 +40,7 @@ required_collection_strength = 1
 required_collection_type = 2
 dropped_item = ExtResource("4_0kbbc")
 item_count = 1
-base_time_to_collect = 5.0
+base_time_to_collect = 2.0
 secondary_items = Array[ExtResource("6_6f44w")]([SubResource("Resource_vj607")])
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ResourceNode"]

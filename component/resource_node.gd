@@ -10,7 +10,8 @@ signal resources_depleted
 enum CollectionStrength {
 	NONE,
 	STONE,
-	IRON
+	IRON,
+	SAPPHIRE
 }
 enum CollectionType {
 	ANY,

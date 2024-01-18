@@ -6,7 +6,7 @@
 
 [node name="CraftingPanel" type="HSplitContainer"]
 custom_minimum_size = Vector2(648, 300)
-split_offset = 230
+split_offset = 245
 script = ExtResource("1_a3lcv")
 recipe_button_scene = ExtResource("2_sjwtk")
 

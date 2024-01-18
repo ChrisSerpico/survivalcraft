@@ -2,6 +2,9 @@ extends CharacterBody2D
 class_name Player
 
 
+signal recipe_list_updated(recipe_list: Array[RecipeData], inventory: InventoryData)
+
+
 @onready var animated_sprite: PlayerSprite = $AnimationPlayer
 @onready var sprite_overlay: ColorRect = $Sprite2D/Overlay
 @onready var interaction_ray: RayCast2D = $InteractionRay
@@ -24,6 +27,14 @@ var floating_slot: SlotData
 var ejection_speed: float = 350
 
 var in_menu: bool = false
+
+# Easter egg stuff
+var found_gold: bool = false
+var found_sapphire: bool = false
+var found_recipe: bool = false
+@export var gold_bar_data: ItemData
+@export var sapphire_data: ItemData
+@export var sapphire_pick_recipe: RecipeData
 
 
 # Called when the node enters the scene tree for the first time.
@@ -104,6 +115,7 @@ func stack_from_floating(to_slot: SlotData, single: bool = false):
 
 
 func pick_up(item: Item) -> bool:
+	check_easter_egg_recipe(item.item_data)
 	return inventory.add_item(item)
 
 
@@ -122,6 +134,8 @@ func drop_from_slot(slot: SlotData, count: int):
 
 func craft_recipe(recipe: RecipeData):
 	var dropped_item_scenes = inventory.craft_item(recipe) as Array[Item]
+	
+	check_easter_egg_recipe(recipe.output.item_data)
 	
 	if not dropped_item_scenes.is_empty():
 		for scene in dropped_item_scenes:
@@ -177,4 +191,18 @@ func handle_primary_interaction(delta: float):
 	
 	if interaction_target is ResourceNode:
 		interaction_target.add_collection_progress(delta, active_equipment_slot.item)
+
+# TODO: remove/change once easter egg is finished 
+func check_easter_egg_recipe(item: ItemData):
+	if found_recipe:
+		return
 	
+	if item == gold_bar_data:
+		found_gold = true
+	elif item == sapphire_data:
+		found_sapphire = true
+	
+	if found_gold and found_sapphire:
+		known_recipes.append(sapphire_pick_recipe)
+		recipe_list_updated.emit(known_recipes, inventory)
+		found_recipe = true

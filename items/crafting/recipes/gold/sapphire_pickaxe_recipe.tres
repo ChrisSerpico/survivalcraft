@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=11 format=3 uid="uid://dsjsr78n6f6p4"]
+
+[ext_resource type="Resource" uid="uid://cd6kg3figgtvy" path="res://items/resources/crafting/handle.tres" id="1_gqj7r"]
+[ext_resource type="Script" path="res://items/crafting/recipe_item.gd" id="2_p3ywq"]
+[ext_resource type="Resource" uid="uid://c3t6wp328d2qw" path="res://items/resources/bars/gold_bar.tres" id="3_joa1d"]
+[ext_resource type="Resource" uid="uid://cnom06if40w8v" path="res://items/resources/gems/sapphire.tres" id="4_etjg6"]
+[ext_resource type="Script" path="res://items/crafting/recipe_data.gd" id="5_8lx01"]
+[ext_resource type="Resource" uid="uid://bonqlqn1ch0lx" path="res://items/resources/tools/picks/sapphire_pick.tres" id="5_i01ne"]
+
+[sub_resource type="Resource" id="Resource_nfawb"]
+script = ExtResource("2_p3ywq")
+item_data = ExtResource("1_gqj7r")
+count = 1
+
+[sub_resource type="Resource" id="Resource_46w1r"]
+script = ExtResource("2_p3ywq")
+item_data = ExtResource("3_joa1d")
+count = 3
+
+[sub_resource type="Resource" id="Resource_dp15c"]
+script = ExtResource("2_p3ywq")
+item_data = ExtResource("4_etjg6")
+count = 1
+
+[sub_resource type="Resource" id="Resource_4ddtl"]
+script = ExtResource("2_p3ywq")
+item_data = ExtResource("5_i01ne")
+count = 1
+
+[resource]
+script = ExtResource("5_8lx01")
+recipe_name = "Sapphire-tipped Gold Pickaxe"
+inputs = Array[ExtResource("2_p3ywq")]([SubResource("Resource_nfawb"), SubResource("Resource_46w1r"), SubResource("Resource_dp15c")])
+output = SubResource("Resource_4ddtl")

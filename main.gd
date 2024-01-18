@@ -99,6 +99,7 @@ func spawn_player():
 	
 	player_crafting_panel.display_recipe_list(local_player_instance.known_recipes, local_player_instance.inventory)
 	player_crafting_panel.recipe_craft_attempted.connect(local_player_instance.craft_recipe)
+	local_player_instance.recipe_list_updated.connect(player_crafting_panel.display_recipe_list)
 	
 	current_state = GameState.IN_GAME
 

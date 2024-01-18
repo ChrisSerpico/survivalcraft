@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://bonqlqn1ch0lx"]
+
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_i2y7u"]
+[ext_resource type="Texture2D" uid="uid://cexa30dexpwvy" path="res://items/assets/tools/sapphire_pick.tres" id="2_cuj5h"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="3_1af0p"]
+
+[resource]
+script = ExtResource("3_1af0p")
+name = "Sapphire-tipped Gold Pickaxe"
+image = ExtResource("2_cuj5h")
+stackable = false
+description = "Unspeakably gaudy, but also unspeakably efficient."
+dropped_base_scene = ExtResource("1_i2y7u")
+collection_strength = 3
+collection_types = Array[int]([2])
+collection_speed_mod = 999.0
+base_damage = 1
