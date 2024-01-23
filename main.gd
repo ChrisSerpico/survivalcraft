@@ -86,6 +86,8 @@ func spawn_player():
 	map.add_child(local_player_instance)
 	
 	local_player_instance.map = map
+	local_player_instance.moved_tiles.connect(map._on_player_moved_tiles)
+	
 	player_camera.camera_target = local_player_instance
 	
 	player_inventory_display.display_inventory(local_player_instance.inventory, local_player_instance.equipment_size)

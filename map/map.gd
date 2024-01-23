@@ -15,8 +15,7 @@ enum BaseTerrain {
 }
 
 
-const LIGHTING_MAX = 11
-
+@onready var light_map: LightMap = $LightMap
 
 @export var grass_scenes: Array[MapScene]
 @export var forest_scenes: Array[MapScene]
@@ -25,9 +24,6 @@ const LIGHTING_MAX = 11
 
 @export var noise: FastNoiseLite
 @export var cave_noise: FastNoiseLite
-
-var calculated_lightmap = {}
-var blocked_cells = {}
 
 
 # Called when the node enters the scene tree for the first time.
@@ -45,18 +41,18 @@ func generate_map(width: int, height: int, x_offset: int = 0, y_offset: int = 0)
 		BaseTerrain.CAVE: [] as Array[Vector2i]
 	}
 	
-	calculated_lightmap.clear()
-	blocked_cells.clear()
+	light_map.reset()
 	
 	for x in range(width):
 		for y in range(height):
 			var cell_position = Vector2i(x + x_offset, y + y_offset)
 			var noise_value = noise.get_noise_2d(x + x_offset, y + y_offset)
 			
-			calculated_lightmap[cell_position] = -99
+			light_map.add_position(cell_position)
 			
 			if (noise_value > 0.35):
 				cells[BaseTerrain.CAVE].append(cell_position)
+				light_map.set_indoors(cell_position, true) # TODO: do this in a less dumb way
 			elif (noise_value > 0.22):
 				cells[BaseTerrain.FOREST].append(cell_position)
 			elif (noise_value > -.1):
@@ -70,20 +66,12 @@ func generate_map(width: int, height: int, x_offset: int = 0, y_offset: int = 0)
 	
 	for terrain in cells:
 		set_cells_terrain_connect(0, cells[terrain], 0, terrain, false)
-		
-		for cell in cells[terrain]:
-			var tile_data = get_cell_tile_data(0, cell)
-			if not tile_data.get_custom_data("indoors"):
-				calculated_lightmap[cell] = LIGHTING_MAX
 	
 	generate_scenes(cells[BaseTerrain.GRASS], grass_scenes)
 	generate_scenes(cells[BaseTerrain.FOREST], forest_scenes)
 	generate_cave_scenes(cells[BaseTerrain.CAVE], cave_scenes, cave_wall_scenes)
 	
-	recalculate_lighting()
-	
-	for cell_position in calculated_lightmap.keys():
-		set_cell(1, cell_position, 0, Vector2i(maxi(calculated_lightmap[cell_position], 0), 0))
+	light_map.recalculate_all()
 	
 	generation_finished.emit()
 
@@ -101,13 +89,13 @@ func generate_cave_scenes(cells: Array[Vector2i], map_scenes: Array[MapScene], w
 	var total_wall_weight = get_total_weight(wall_scenes)
 	
 	for cell in cells:
-		var cell_position = map_to_local(cell)
+		var local_cell_position = map_to_local(cell)
 		
-		if cave_noise.get_noise_2d(cell_position.x, cell_position.y) > 0.22:
-			generate_scene_at_position(map_scenes, total_weight, cell_position)
+		if cave_noise.get_noise_2d(local_cell_position.x, local_cell_position.y) > 0.22:
+			generate_scene_at_position(map_scenes, total_weight, local_cell_position)
 		else:
-			generate_scene_at_position(wall_scenes, total_wall_weight, cell_position)
-			blocked_cells[cell] = true
+			generate_scene_at_position(wall_scenes, total_wall_weight, local_cell_position)
+			light_map.set_blocked(cell, true)
 
 
 func get_total_weight(scene_list: Array[MapScene]) -> int:
@@ -137,39 +125,13 @@ func instantiate_scene_at_position(scene: PackedScene, at_position: Vector2):
 	add_child(instance)
 
 
-func recalculate_lighting():
-	var changed = true
-	
-	while changed:
-		changed = false
-		
-		for cell_position in calculated_lightmap.keys():
-			var highest_adjacent = get_highest_adjacent_lighting(cell_position)
-			
-			if highest_adjacent > calculated_lightmap[cell_position] + 1:
-				calculated_lightmap[cell_position] = highest_adjacent - 1
-				changed = true
-
-
-func get_highest_adjacent_lighting(cell_position: Vector2i) -> int:
-	var highest_lighting = 0
-	
-	for x in range(cell_position.x - 1, cell_position.x + 2):
-		for y in range(cell_position.y - 1, cell_position.y + 2):
-			var check_position = Vector2i(x, y)
-			
-			if check_position == cell_position or blocked_cells.get(check_position, false):
-				continue
-			elif calculated_lightmap.has(check_position):
-				highest_lighting = maxi(highest_lighting, calculated_lightmap[check_position])
-	
-	return highest_lighting
-
-
 func clear_map():
 	clear()
 	
 	for child in get_children():
+		if child is LightMap:
+			continue
+		
 		child.queue_free()
 
 
@@ -182,3 +144,8 @@ func update_seed(new_seed: int = 0):
 		noise.seed = new_seed
 	
 	cave_noise.seed = noise.seed + 1
+
+
+func _on_player_moved_tiles(previous_position: Vector2i, new_position: Vector2i, player_instance: Player):
+	light_map.remove_light(previous_position)
+	light_map.add_light(new_position, 2)

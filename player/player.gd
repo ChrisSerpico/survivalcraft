@@ -3,6 +3,7 @@ class_name Player
 
 
 signal recipe_list_updated(recipe_list: Array[RecipeData], inventory: InventoryData)
+signal moved_tiles(previous_position: Vector2i, new_position: Vector2i, player_instance: Player)
 
 
 @onready var animated_sprite: PlayerSprite = $AnimationPlayer
@@ -14,6 +15,7 @@ signal recipe_list_updated(recipe_list: Array[RecipeData], inventory: InventoryD
 var speed_mod: float = 1
 
 @export var map: TileMap
+var current_tile_position: Vector2i
 
 @export var inventory_size: int
 @export var equipment_size: int
@@ -50,6 +52,12 @@ func _process(delta):
 	# Ongoing effects
 	handle_tile_effects()
 	interaction_ray.target_position = get_local_mouse_position() - interaction_ray.position
+	
+	# TODO: offset this with a variable rather than a magic number
+	var tile_position = map.local_to_map(position + Vector2.UP * 7)
+	if tile_position != current_tile_position:
+		moved_tiles.emit(current_tile_position, tile_position, self)
+		current_tile_position = tile_position
 	
 	# Equipment selection
 	if Input.is_action_just_pressed("select_next"):

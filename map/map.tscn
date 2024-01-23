@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bvr42052hcfky"]
+[gd_scene load_steps=46 format=3 uid="uid://bvr42052hcfky"]
 
 [ext_resource type="Texture2D" uid="uid://klgkke7xgsvg" path="res://map/assets/lighting/lighting_map.png" id="1_71pp4"]
 [ext_resource type="Script" path="res://map/map.gd" id="3_sqo6o"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://xi2yxokovomc" path="res://entity/cave/iron_ore_wall.tscn" id="16_quc5v"]
 [ext_resource type="PackedScene" uid="uid://mr8qxdr654hf" path="res://entity/cave/gold_ore_wall.tscn" id="17_nwgnp"]
 [ext_resource type="PackedScene" uid="uid://dxrqn3arlyj6o" path="res://entity/cave/sapphire_gem_wall.tscn" id="18_dae6e"]
+[ext_resource type="Script" path="res://map/light_map.gd" id="20_fhlwu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yvff4"]
 texture = ExtResource("1_71pp4")
@@ -475,6 +476,23 @@ fractal_type = 2
 domain_warp_amplitude = 28.435
 domain_warp_frequency = 0.66
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nf3e0"]
+texture = ExtResource("1_71pp4")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_lmxrj"]
+sources/0 = SubResource("TileSetAtlasSource_nf3e0")
+
 [node name="Map" type="TileMap"]
 tile_set = SubResource("TileSet_avqrx")
 format = 2
@@ -489,3 +507,9 @@ cave_scenes = Array[ExtResource("5_cgppm")]([SubResource("Resource_iyxvn"), SubR
 cave_wall_scenes = Array[ExtResource("5_cgppm")]([SubResource("Resource_w1klh"), SubResource("Resource_2cxnm"), SubResource("Resource_2coht"), SubResource("Resource_cyln4")])
 noise = SubResource("FastNoiseLite_2mwpj")
 cave_noise = SubResource("FastNoiseLite_sm2g5")
+
+[node name="LightMap" type="TileMap" parent="."]
+top_level = true
+tile_set = SubResource("TileSet_lmxrj")
+format = 2
+script = ExtResource("20_fhlwu")
