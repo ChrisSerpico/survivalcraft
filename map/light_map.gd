@@ -2,113 +2,177 @@ extends TileMap
 class_name LightMap
 
 
-const LIGHTING_MAX = 11
+const MAX_LIGHT = 7
 
-var lights = {}
+var outdoor_lightmap = {}
+var temp_lightmap = {}
 var calculated_lightmap = {}
 
-# TODO: break these into a resource 
-var indoor_cells = {}
+# TODO: break these into a resource maybe?
+var lights = {}
+var outdoor_cells = {}
 var blocked_cells = {}
 
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
 func reset():
-	lights.clear()
+	clear()
 	calculated_lightmap.clear()
-	indoor_cells.clear()
+	outdoor_lightmap.clear()
+	temp_lightmap.clear()
+	
+	outdoor_cells.clear()
 	blocked_cells.clear()
 
 
 func add_position(cell_position: Vector2i):
-	if calculated_lightmap.has(cell_position):
-		return
-	
-	calculated_lightmap[cell_position] = -99
+	calculated_lightmap[cell_position] = 0
 
 
-func set_indoors(cell_position, indoors: bool):
-	indoor_cells[cell_position] = indoors
+func set_outdoors(cell_position: Vector2i, outdoors: bool):
+	outdoor_cells[cell_position] = outdoors
 
 
 func set_blocked(cell_position: Vector2i, blocked: bool):
 	blocked_cells[cell_position] = blocked
 
 
-func add_light(position: Vector2i, brightness: int):
-	lights[position] = brightness
-	
-	if (brightness > calculated_lightmap[position]):
-		recalculate_in_area(position.x, position.y, brightness, brightness)
+func recalculate_lightmap():
+	recalculate_lightmap_for_positions(calculated_lightmap.keys())
 
 
-func remove_light(position: Vector2i):
-	var brightness = lights.get(position, 0)
-	lights.erase(position)
-	
-	recalculate_in_area(position.x, position.y, brightness, brightness)
-
-
-func recalculate_all():
-	recalculate_for_positions(calculated_lightmap.keys())
-
-
-func recalculate_in_area(x_origin: int, y_origin: int, width: int, height: int):
+func recalculate_lightmap_in_area(origin: Vector2i, dist: int):
 	var cells_to_recalculate = []
-	for x in range(x_origin - width, x_origin + width + 1):
-		for y in range(y_origin - height, y_origin + height + 1):
+	for x in range(origin.x - dist, origin.x + dist + 1):
+		for y in range(origin.y - dist, origin.y + dist + 1):
 			cells_to_recalculate.append(Vector2i(x, y))
 	
-	recalculate_for_positions(cells_to_recalculate)
+	recalculate_lightmap_for_positions(cells_to_recalculate)
 
 
-# TODO: queue this and only do a certain amount of updates each _process
-func recalculate_for_positions(positions: Array):
-	for position in positions:
-		if not indoor_cells.get(position, false):
-			calculated_lightmap[position] = LIGHTING_MAX
-		elif lights.has(position):
-			calculated_lightmap[position] = lights[position]
-		else:
-			calculated_lightmap[position] = 0
+func recalculate_lightmap_for_positions(cell_positions: Array):
+	for cell_position in cell_positions:
+		calculated_lightmap[cell_position] = maxi(temp_lightmap.get(cell_position, 0), outdoor_lightmap.get(cell_position, 0))
 	
-	var changed = true
-	while changed:
-		changed = false
+	rerender_positions(cell_positions)
+
+
+func recalculate_outdoor_lightmap():
+	var cells_to_propogate = []
+	
+	for outdoor_cell in outdoor_cells:
+		outdoor_lightmap[outdoor_cell] = MAX_LIGHT
 		
-		for position in positions:
-			if calculated_lightmap[position] == LIGHTING_MAX:
+		for adjacent_cell in get_adjacent_cells(outdoor_cell):
+			if not outdoor_cells.has(adjacent_cell) and calculated_lightmap.has(adjacent_cell):
+				cells_to_propogate.append(adjacent_cell)
+	
+	for propogation_target in cells_to_propogate:
+		propogate_light_at_position(propogation_target, outdoor_lightmap, MAX_LIGHT - 1)
+
+
+func render_lightmap():
+	rerender_positions(calculated_lightmap.keys())
+
+
+func rerender_positions(cell_positions: Array):
+	for cell_position in cell_positions:
+		set_cell(0, cell_position, 0, Vector2i(mini(calculated_lightmap[cell_position], MAX_LIGHT), 0))
+
+
+func propogate_light_at_position(position: Vector2i, light_map: Dictionary, brightness: int):
+	if light_map.get(position, 0) >= brightness:
+		return
+	
+	var light_level = brightness
+	var visited_cells = {
+		position: true
+	}
+	var cells_to_check = [position]
+	
+	while len(cells_to_check) > 0:
+		for i in range(len(cells_to_check)):
+			var next_cell = cells_to_check.pop_front()
+			
+			if light_map.get(next_cell, 0) >= light_level:
 				continue
 			
-			var highest_adjacent = get_highest_adjacent_lighting(position)
+			light_map[next_cell] = light_level
 			
-			if highest_adjacent > calculated_lightmap[position] + 1:
-				calculated_lightmap[position] = highest_adjacent - 1
-				changed = true
+			if blocked_cells.has(next_cell):
+				continue
+			
+			for adjacent_cell in get_adjacent_cells(next_cell):
+				if not visited_cells.has(adjacent_cell):
+					visited_cells[adjacent_cell] = true
+					cells_to_check.append(adjacent_cell)
+		
+		light_level -= 1
+		
+		if light_level <= 0:
+			break
+
+
+func add_light(position: Vector2i, brightness: int):
+	if lights.has(position):
+		remove_light(position)
 	
-	for cell_position in positions:
-		set_cell(0, cell_position, 0, Vector2i(maxi(calculated_lightmap[cell_position], 0), 0))
+	lights[position] = brightness
+	
+	if temp_lightmap.get(position, 0) >= brightness:
+		return
+	
+	propogate_light_at_position(position, temp_lightmap, brightness)
+	recalculate_lightmap_in_area(position, brightness - 1)
 
 
-func get_highest_adjacent_lighting(cell_position: Vector2i) -> int:
-	var highest_lighting = 0
+func remove_light(cell_position: Vector2i):
+	if not lights.has(cell_position):
+		return
+	
+	# invalidate light in area, propagate lights in that area, then propagate adjacent light into area
+	var light = lights[cell_position]
+	lights.erase(cell_position)
+	
+	var cleared_cells = []
+	var edge_cells = []
+	
+	for x in range(cell_position.x - light, cell_position.x + light + 1):
+		for y in range(cell_position.y - light, cell_position.y + light + 1):
+			var clear_position = Vector2i(x, y)
+			
+			if x == cell_position.x - light or x == cell_position.x + light + 1:
+				edge_cells.append(clear_position)
+			elif y == cell_position.y - light or y == cell_position.y + light + 1:
+				edge_cells.append(clear_position)
+			
+			temp_lightmap[clear_position] = 0
+			cleared_cells.append(clear_position)
+	
+	for cleared_cell in cleared_cells:
+		if lights.has(cleared_cell):
+			propogate_light_at_position(cleared_cell, temp_lightmap, lights[cleared_cell])
+	
+	for edge_cell in edge_cells:
+		var highest_adjacent_light = 0
+		
+		for adjacent_to_edge in get_adjacent_cells(edge_cell):
+			highest_adjacent_light = temp_lightmap.get(adjacent_to_edge, 0)
+		
+		propogate_light_at_position(edge_cell, temp_lightmap, highest_adjacent_light - 1)
+	
+	recalculate_lightmap_in_area(cell_position, light - 1)
+
+
+func get_adjacent_cells(cell_position: Vector2i) -> Array:
+	var adjacents = []
 	
 	for x in range(cell_position.x - 1, cell_position.x + 2):
 		for y in range(cell_position.y - 1, cell_position.y + 2):
-			var check_position = Vector2i(x, y)
+			var adjacent_cell = Vector2i(x, y)
 			
-			if check_position == cell_position or blocked_cells.get(check_position, false):
+			if adjacent_cell == cell_position:
 				continue
-			elif calculated_lightmap.has(check_position):
-				highest_lighting = maxi(highest_lighting, calculated_lightmap[check_position])
+			
+			adjacents.append(adjacent_cell)
 	
-	return highest_lighting
+	return adjacents

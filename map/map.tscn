@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bvr42052hcfky"]
+[gd_scene load_steps=47 format=3 uid="uid://bvr42052hcfky"]
 
 [ext_resource type="Texture2D" uid="uid://klgkke7xgsvg" path="res://map/assets/lighting/lighting_map.png" id="1_71pp4"]
 [ext_resource type="Script" path="res://map/map.gd" id="3_sqo6o"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://mr8qxdr654hf" path="res://entity/cave/gold_ore_wall.tscn" id="17_nwgnp"]
 [ext_resource type="PackedScene" uid="uid://dxrqn3arlyj6o" path="res://entity/cave/sapphire_gem_wall.tscn" id="18_dae6e"]
 [ext_resource type="Script" path="res://map/light_map.gd" id="20_fhlwu"]
+[ext_resource type="Texture2D" uid="uid://csv5wt3588l2c" path="res://map/assets/lighting/lighting_ramp.png" id="20_hpv37"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yvff4"]
 texture = ExtResource("1_71pp4")
@@ -476,8 +477,8 @@ fractal_type = 2
 domain_warp_amplitude = 28.435
 domain_warp_frequency = 0.66
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nf3e0"]
-texture = ExtResource("1_71pp4")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ugw75"]
+texture = ExtResource("20_hpv37")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -486,12 +487,9 @@ texture = ExtResource("1_71pp4")
 5:0/0 = 0
 6:0/0 = 0
 7:0/0 = 0
-8:0/0 = 0
-9:0/0 = 0
-10:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_lmxrj"]
-sources/0 = SubResource("TileSetAtlasSource_nf3e0")
+sources/0 = SubResource("TileSetAtlasSource_ugw75")
 
 [node name="Map" type="TileMap"]
 tile_set = SubResource("TileSet_avqrx")

@@ -50,9 +50,11 @@ func generate_map(width: int, height: int, x_offset: int = 0, y_offset: int = 0)
 			
 			light_map.add_position(cell_position)
 			
+			var indoors = false
+			
 			if (noise_value > 0.35):
 				cells[BaseTerrain.CAVE].append(cell_position)
-				light_map.set_indoors(cell_position, true) # TODO: do this in a less dumb way
+				indoors = true
 			elif (noise_value > 0.22):
 				cells[BaseTerrain.FOREST].append(cell_position)
 			elif (noise_value > -.1):
@@ -63,6 +65,9 @@ func generate_map(width: int, height: int, x_offset: int = 0, y_offset: int = 0)
 				cells[BaseTerrain.WATER].append(cell_position)
 			else:
 				cells[BaseTerrain.DEEP_WATER].append(cell_position)
+			
+			if not indoors:
+				light_map.set_outdoors(cell_position, true)
 	
 	for terrain in cells:
 		set_cells_terrain_connect(0, cells[terrain], 0, terrain, false)
@@ -71,7 +76,8 @@ func generate_map(width: int, height: int, x_offset: int = 0, y_offset: int = 0)
 	generate_scenes(cells[BaseTerrain.FOREST], forest_scenes)
 	generate_cave_scenes(cells[BaseTerrain.CAVE], cave_scenes, cave_wall_scenes)
 	
-	light_map.recalculate_all()
+	light_map.recalculate_outdoor_lightmap()
+	light_map.recalculate_lightmap()
 	
 	generation_finished.emit()
 
@@ -148,4 +154,4 @@ func update_seed(new_seed: int = 0):
 
 func _on_player_moved_tiles(previous_position: Vector2i, new_position: Vector2i, player_instance: Player):
 	light_map.remove_light(previous_position)
-	light_map.add_light(new_position, 2)
+	light_map.add_light(new_position, 6)
