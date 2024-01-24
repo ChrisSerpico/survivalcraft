@@ -25,6 +25,8 @@ enum BaseTerrain {
 @export var noise: FastNoiseLite
 @export var cave_noise: FastNoiseLite
 
+var max_north_south_bias: float = .7
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,10 +45,14 @@ func generate_map(width: int, height: int, x_offset: int = 0, y_offset: int = 0)
 	
 	light_map.reset()
 	
-	for x in range(width):
-		for y in range(height):
+	var north_south_bias_step = max_north_south_bias / (height / 2.0)
+	
+	for y in range(height):
+		var current_bias = clampf((y + y_offset) * (-north_south_bias_step), -1 , 1)
+		print(current_bias)
+		for x in range(width):
 			var cell_position = Vector2i(x + x_offset, y + y_offset)
-			var noise_value = noise.get_noise_2d(x + x_offset, y + y_offset)
+			var noise_value = noise.get_noise_2d(x + x_offset, y + y_offset) + current_bias
 			
 			light_map.add_position(cell_position)
 			
@@ -55,13 +61,13 @@ func generate_map(width: int, height: int, x_offset: int = 0, y_offset: int = 0)
 			if (noise_value > 0.35):
 				cells[BaseTerrain.CAVE].append(cell_position)
 				indoors = true
-			elif (noise_value > 0.22):
+			elif (noise_value > 0.1):
 				cells[BaseTerrain.FOREST].append(cell_position)
-			elif (noise_value > -.1):
+			elif (noise_value > -.2):
 				cells[BaseTerrain.GRASS].append(cell_position)
-			elif (noise_value > -0.15):
+			elif (noise_value > -0.3):
 				cells[BaseTerrain.SAND].append(cell_position)
-			elif (noise_value > -0.25):
+			elif (noise_value > -0.5):
 				cells[BaseTerrain.WATER].append(cell_position)
 			else:
 				cells[BaseTerrain.DEEP_WATER].append(cell_position)
