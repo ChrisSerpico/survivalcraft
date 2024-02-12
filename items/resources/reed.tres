@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://ddfbkp5acqhis"]
+
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_3vkb8"]
+[ext_resource type="Texture2D" uid="uid://d3b5vr8uatwes" path="res://items/assets/plant_resources/reed_bundle.tres" id="2_mkjcf"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="3_f7iea"]
+
+[resource]
+script = ExtResource("3_f7iea")
+name = "Bundle of Reeds"
+image = ExtResource("2_mkjcf")
+stackable = true
+description = "A tightly wrapped bundle of reeds. Harvested from hardy plants that grow by the water."
+dropped_base_scene = ExtResource("1_3vkb8")
+collection_strength = 0
+collection_types = Array[int]([])
+collection_speed_mod = 1.0
+base_damage = 1

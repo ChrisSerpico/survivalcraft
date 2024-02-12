@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=9 format=3 uid="uid://1v4eyic5sit7"]
+
+[ext_resource type="Resource" uid="uid://bikyw3sle0lx6" path="res://items/resources/bars/iron_bar.tres" id="1_e03ix"]
+[ext_resource type="Script" path="res://items/crafting/recipe_item.gd" id="2_k7b4n"]
+[ext_resource type="Resource" uid="uid://c4m1n7lc3himi" path="res://items/resources/gems/lightning_crystal.tres" id="3_bmor4"]
+[ext_resource type="Resource" uid="uid://c2r5vnvmjboly" path="res://items/resources/tools/light/lantern.tres" id="4_bi53e"]
+[ext_resource type="Script" path="res://items/crafting/recipe_data.gd" id="5_4g02k"]
+
+[sub_resource type="Resource" id="Resource_y1ci1"]
+script = ExtResource("2_k7b4n")
+item_data = ExtResource("1_e03ix")
+count = 2
+
+[sub_resource type="Resource" id="Resource_clb5o"]
+script = ExtResource("2_k7b4n")
+item_data = ExtResource("3_bmor4")
+count = 1
+
+[sub_resource type="Resource" id="Resource_nm0ht"]
+script = ExtResource("2_k7b4n")
+item_data = ExtResource("4_bi53e")
+count = 1
+
+[resource]
+script = ExtResource("5_4g02k")
+recipe_name = "Lantern"
+inputs = Array[ExtResource("2_k7b4n")]([SubResource("Resource_y1ci1"), SubResource("Resource_clb5o")])
+output = SubResource("Resource_nm0ht")

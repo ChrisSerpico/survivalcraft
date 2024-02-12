@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c2r5vnvmjboly"]
+
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_pm32y"]
+[ext_resource type="Texture2D" uid="uid://c8wjcio1pu7b6" path="res://items/assets/lights/lantern.tres" id="2_3006b"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="3_a7voe"]
+
+[resource]
+script = ExtResource("3_a7voe")
+name = "Lantern"
+image = ExtResource("2_3006b")
+stackable = false
+description = "An iron lantern fitted with a glowing crystal. Much brighter than a basic torch. "
+dropped_base_scene = ExtResource("1_pm32y")
+collection_strength = 0
+collection_types = Array[int]([])
+collection_speed_mod = 1.0
+base_damage = 1

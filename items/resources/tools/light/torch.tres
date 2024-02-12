@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://fbmv486uokb2"]
+
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_0q1la"]
+[ext_resource type="Texture2D" uid="uid://kxkiv4luscns" path="res://items/assets/lights/torch.tres" id="2_i3xfm"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="3_tchhb"]
+
+[resource]
+script = ExtResource("3_tchhb")
+name = "Torch"
+image = ExtResource("2_i3xfm")
+stackable = false
+description = "A tightly wrapped bundle of reeds, set on fire. Helps to see in dark places."
+dropped_base_scene = ExtResource("1_0q1la")
+collection_strength = 0
+collection_types = Array[int]([])
+collection_speed_mod = 1.0
+base_damage = 1

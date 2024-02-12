@@ -1,0 +1,28 @@
+[gd_resource type="Resource" script_class="RecipeData" load_steps=9 format=3 uid="uid://7v5kj6fnefwb"]
+
+[ext_resource type="Script" path="res://items/crafting/recipe_data.gd" id="1_d1a74"]
+[ext_resource type="Resource" uid="uid://cd6kg3figgtvy" path="res://items/resources/crafting/handle.tres" id="1_kjy4q"]
+[ext_resource type="Script" path="res://items/crafting/recipe_item.gd" id="2_byo3g"]
+[ext_resource type="Resource" uid="uid://ddfbkp5acqhis" path="res://items/resources/reed.tres" id="3_ncxwj"]
+[ext_resource type="Resource" uid="uid://fbmv486uokb2" path="res://items/resources/tools/light/torch.tres" id="4_oe5nf"]
+
+[sub_resource type="Resource" id="Resource_y1ci1"]
+script = ExtResource("2_byo3g")
+item_data = ExtResource("1_kjy4q")
+count = 1
+
+[sub_resource type="Resource" id="Resource_clb5o"]
+script = ExtResource("2_byo3g")
+item_data = ExtResource("3_ncxwj")
+count = 1
+
+[sub_resource type="Resource" id="Resource_nm0ht"]
+script = ExtResource("2_byo3g")
+item_data = ExtResource("4_oe5nf")
+count = 1
+
+[resource]
+script = ExtResource("1_d1a74")
+recipe_name = "Torch"
+inputs = Array[ExtResource("2_byo3g")]([SubResource("Resource_y1ci1"), SubResource("Resource_clb5o")])
+output = SubResource("Resource_nm0ht")

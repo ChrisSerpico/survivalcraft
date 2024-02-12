@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://c4m1n7lc3himi"]
+
+[ext_resource type="PackedScene" uid="uid://vwy26x0iq4qy" path="res://items/default_dropped_item.tscn" id="1_0kg5o"]
+[ext_resource type="Texture2D" uid="uid://bwrbkea556eug" path="res://items/assets/core_resources/lightning_crystal.tres" id="2_ecafe"]
+[ext_resource type="Script" path="res://items/item_data.gd" id="3_esl78"]
+
+[resource]
+script = ExtResource("3_esl78")
+name = "Lightning Crystal"
+image = ExtResource("2_ecafe")
+stackable = true
+description = "An odd, luminescent crystal that occasionally forms when lightning strikes the ocean."
+dropped_base_scene = ExtResource("1_0kg5o")
+collection_strength = 0
+collection_types = Array[int]([])
+collection_speed_mod = 1.0
+base_damage = 1
