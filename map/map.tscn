@@ -1,23 +1,18 @@
-[gd_scene load_steps=45 format=3 uid="uid://bvr42052hcfky"]
+[gd_scene load_steps=32 format=3 uid="uid://bvr42052hcfky"]
 
 [ext_resource type="Script" path="res://map/map.gd" id="3_sqo6o"]
 [ext_resource type="Texture2D" uid="uid://drqqqwcqoxjde" path="res://map/assets/exterior_atlas.png" id="4_5e3sk"]
-[ext_resource type="Script" path="res://map/map_scene.gd" id="5_cgppm"]
-[ext_resource type="PackedScene" uid="uid://bemsc6qkyq5tp" path="res://entity/forest/spruce_tree.tscn" id="5_jppm6"]
 [ext_resource type="Texture2D" uid="uid://dqpvpqsw7hvx" path="res://map/assets/forest_atlas.png" id="5_wwsa6"]
 [ext_resource type="Texture2D" uid="uid://dd8e24lytybi6" path="res://map/assets/water.png" id="6_cioc7"]
-[ext_resource type="PackedScene" uid="uid://cdnu21nmx5s8l" path="res://entity/grass/maple_tree.tscn" id="6_fdme8"]
 [ext_resource type="Texture2D" uid="uid://cccehwy5nm3mr" path="res://map/assets/desert_atlas.png" id="6_r7bv5"]
 [ext_resource type="Texture2D" uid="uid://x8eea25dy3kb" path="res://map/assets/overworld_atlas.png" id="7_lxji2"]
-[ext_resource type="PackedScene" uid="uid://10nyibp2lrf1" path="res://entity/grass/grassland_rock.tscn" id="9_yhq17"]
-[ext_resource type="PackedScene" uid="uid://dooummp6f7drk" path="res://entity/grass/two_rock.tscn" id="10_lsvju"]
-[ext_resource type="PackedScene" uid="uid://drvdh7pnccfri" path="res://entity/cave/cave_wall.tscn" id="10_lvyxi"]
-[ext_resource type="PackedScene" uid="uid://ckjkd212lxecv" path="res://entity/forest/oak_tree.tscn" id="11_pixnk"]
-[ext_resource type="PackedScene" uid="uid://dx1hhu4mlvfqt" path="res://entity/forest/bush.tscn" id="12_m7f5i"]
-[ext_resource type="PackedScene" uid="uid://c4ahfhekqnx6x" path="res://entity/cave/three_rock.tscn" id="14_53rk8"]
-[ext_resource type="PackedScene" uid="uid://xi2yxokovomc" path="res://entity/cave/iron_ore_wall.tscn" id="16_quc5v"]
-[ext_resource type="PackedScene" uid="uid://mr8qxdr654hf" path="res://entity/cave/gold_ore_wall.tscn" id="17_nwgnp"]
-[ext_resource type="PackedScene" uid="uid://dxrqn3arlyj6o" path="res://entity/cave/sapphire_gem_wall.tscn" id="18_dae6e"]
+[ext_resource type="Resource" uid="uid://cufqkdo86in1q" path="res://map/biomes/deep_water.tres" id="7_ngf5f"]
+[ext_resource type="Resource" uid="uid://difog60fghf33" path="res://map/biomes/cave.tres" id="7_wgr6w"]
+[ext_resource type="Script" path="res://map/biome_region.gd" id="8_ucp6w"]
+[ext_resource type="Resource" uid="uid://pin1pi6ifhb" path="res://map/biomes/forest.tres" id="9_y65rh"]
+[ext_resource type="Resource" uid="uid://bhycyjjprbbv" path="res://map/biomes/grassland.tres" id="10_eh64g"]
+[ext_resource type="Resource" uid="uid://b2bwdpucjt8g0" path="res://map/biomes/beach.tres" id="11_xiatb"]
+[ext_resource type="Resource" uid="uid://dp7m5wpbm2kre" path="res://map/biomes/water.tres" id="12_lw1oa"]
 [ext_resource type="Script" path="res://map/light_map.gd" id="20_fhlwu"]
 [ext_resource type="Texture2D" uid="uid://csv5wt3588l2c" path="res://map/assets/lighting/lighting_ramp.png" id="20_hpv37"]
 
@@ -359,72 +354,35 @@ sources/5 = SubResource("TileSetAtlasSource_keci0")
 sources/6 = SubResource("TileSetAtlasSource_dbf0g")
 sources/7 = SubResource("TileSetAtlasSource_0rryf")
 
-[sub_resource type="Resource" id="Resource_5tx2u"]
-script = ExtResource("5_cgppm")
-weight = 5000
+[sub_resource type="Resource" id="Resource_h5w1w"]
+script = ExtResource("8_ucp6w")
+biome = ExtResource("7_wgr6w")
+noise_value_cutoff = 0.35
 
-[sub_resource type="Resource" id="Resource_6dgr7"]
-script = ExtResource("5_cgppm")
-scene = ExtResource("6_fdme8")
-weight = 5
+[sub_resource type="Resource" id="Resource_04sxh"]
+script = ExtResource("8_ucp6w")
+biome = ExtResource("9_y65rh")
+noise_value_cutoff = 0.1
 
-[sub_resource type="Resource" id="Resource_yy54m"]
-script = ExtResource("5_cgppm")
-scene = ExtResource("9_yhq17")
-weight = 5
+[sub_resource type="Resource" id="Resource_gtmob"]
+script = ExtResource("8_ucp6w")
+biome = ExtResource("10_eh64g")
+noise_value_cutoff = -0.2
 
-[sub_resource type="Resource" id="Resource_2p8nv"]
-script = ExtResource("5_cgppm")
-scene = ExtResource("10_lsvju")
-weight = 10
+[sub_resource type="Resource" id="Resource_lqc6a"]
+script = ExtResource("8_ucp6w")
+biome = ExtResource("11_xiatb")
+noise_value_cutoff = -0.3
 
-[sub_resource type="Resource" id="Resource_kirem"]
-script = ExtResource("5_cgppm")
-weight = 1000
+[sub_resource type="Resource" id="Resource_tggjj"]
+script = ExtResource("8_ucp6w")
+biome = ExtResource("12_lw1oa")
+noise_value_cutoff = -0.5
 
-[sub_resource type="Resource" id="Resource_2dhit"]
-script = ExtResource("5_cgppm")
-scene = ExtResource("5_jppm6")
-weight = 100
-
-[sub_resource type="Resource" id="Resource_374bs"]
-script = ExtResource("5_cgppm")
-scene = ExtResource("11_pixnk")
-weight = 2
-
-[sub_resource type="Resource" id="Resource_2b3d8"]
-script = ExtResource("5_cgppm")
-scene = ExtResource("12_m7f5i")
-weight = 20
-
-[sub_resource type="Resource" id="Resource_iyxvn"]
-script = ExtResource("5_cgppm")
-weight = 1000
-
-[sub_resource type="Resource" id="Resource_ucbcx"]
-script = ExtResource("5_cgppm")
-scene = ExtResource("14_53rk8")
-weight = 15
-
-[sub_resource type="Resource" id="Resource_w1klh"]
-script = ExtResource("5_cgppm")
-scene = ExtResource("10_lvyxi")
-weight = 2000
-
-[sub_resource type="Resource" id="Resource_2cxnm"]
-script = ExtResource("5_cgppm")
-scene = ExtResource("16_quc5v")
-weight = 50
-
-[sub_resource type="Resource" id="Resource_2coht"]
-script = ExtResource("5_cgppm")
-scene = ExtResource("17_nwgnp")
-weight = 5
-
-[sub_resource type="Resource" id="Resource_cyln4"]
-script = ExtResource("5_cgppm")
-scene = ExtResource("18_dae6e")
-weight = 1
+[sub_resource type="Resource" id="Resource_5mpi1"]
+script = ExtResource("8_ucp6w")
+biome = ExtResource("7_ngf5f")
+noise_value_cutoff = -100.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_2mwpj"]
 noise_type = 5
@@ -460,10 +418,7 @@ layer_1/name = "lightmap"
 layer_1/z_index = 1
 layer_1/tile_data = PackedInt32Array()
 script = ExtResource("3_sqo6o")
-grass_scenes = Array[ExtResource("5_cgppm")]([SubResource("Resource_5tx2u"), SubResource("Resource_6dgr7"), SubResource("Resource_yy54m"), SubResource("Resource_2p8nv")])
-forest_scenes = Array[ExtResource("5_cgppm")]([SubResource("Resource_kirem"), SubResource("Resource_2dhit"), SubResource("Resource_374bs"), SubResource("Resource_2b3d8")])
-cave_scenes = Array[ExtResource("5_cgppm")]([SubResource("Resource_iyxvn"), SubResource("Resource_ucbcx")])
-cave_wall_scenes = Array[ExtResource("5_cgppm")]([SubResource("Resource_w1klh"), SubResource("Resource_2cxnm"), SubResource("Resource_2coht"), SubResource("Resource_cyln4")])
+biome_regions = Array[ExtResource("8_ucp6w")]([SubResource("Resource_h5w1w"), SubResource("Resource_04sxh"), SubResource("Resource_gtmob"), SubResource("Resource_lqc6a"), SubResource("Resource_tggjj"), SubResource("Resource_5mpi1")])
 noise = SubResource("FastNoiseLite_2mwpj")
 cave_noise = SubResource("FastNoiseLite_sm2g5")
 

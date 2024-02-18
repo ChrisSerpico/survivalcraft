@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=2 format=3 uid="uid://dp7m5wpbm2kre"]
+
+[ext_resource type="Script" path="res://map/biome.gd" id="1_hbboy"]
+
+[resource]
+script = ExtResource("1_hbboy")
+terrain_id = 2
+map_scenes = Array[Resource("res://map/map_scene.gd")]([])
+is_cave = false
+cave_wall_scenes = Array[Resource("res://map/map_scene.gd")]([])

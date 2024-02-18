@@ -17,10 +17,8 @@ enum BaseTerrain {
 
 @onready var light_map: LightMap = $LightMap
 
-@export var grass_scenes: Array[MapScene]
-@export var forest_scenes: Array[MapScene]
-@export var cave_scenes: Array[MapScene]
-@export var cave_wall_scenes: Array[MapScene]
+# Note!! These need to be in order from highest region to lowest region (based on noise cutoff)
+@export var biome_regions: Array[BiomeRegion]
 
 @export var noise: FastNoiseLite
 @export var cave_noise: FastNoiseLite
@@ -28,59 +26,41 @@ enum BaseTerrain {
 var max_north_south_bias: float = .7
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	update_seed()
 
 
 func generate_map(width: int, height: int, x_offset: int = 0, y_offset: int = 0):
-	var cells = {
-		BaseTerrain.GRASS: [] as Array[Vector2i],
-		BaseTerrain.SAND: [] as Array[Vector2i],
-		BaseTerrain.WATER: [] as Array[Vector2i],
-		BaseTerrain.DEEP_WATER: [] as Array[Vector2i],
-		BaseTerrain.FOREST: [] as Array[Vector2i],
-		BaseTerrain.CAVE: [] as Array[Vector2i]
-	}
-	
 	light_map.reset()
 	
 	var north_south_bias_step = max_north_south_bias / (height / 2.0)
 	
 	for y in range(height):
 		var current_bias = clampf((y + y_offset) * (-north_south_bias_step), -1 , 1)
-		print(current_bias)
 		for x in range(width):
 			var cell_position = Vector2i(x + x_offset, y + y_offset)
 			var noise_value = noise.get_noise_2d(x + x_offset, y + y_offset) + current_bias
 			
 			light_map.add_position(cell_position)
 			
-			var indoors = false
+			var biome: Biome
+			for biome_region in biome_regions:
+				if noise_value > biome_region.noise_value_cutoff:
+					biome = biome_region.biome
+					break
 			
-			if (noise_value > 0.35):
-				cells[BaseTerrain.CAVE].append(cell_position)
-				indoors = true
-			elif (noise_value > 0.1):
-				cells[BaseTerrain.FOREST].append(cell_position)
-			elif (noise_value > -.2):
-				cells[BaseTerrain.GRASS].append(cell_position)
-			elif (noise_value > -0.3):
-				cells[BaseTerrain.SAND].append(cell_position)
-			elif (noise_value > -0.5):
-				cells[BaseTerrain.WATER].append(cell_position)
-			else:
-				cells[BaseTerrain.DEEP_WATER].append(cell_position)
+			if not biome:
+				push_error('Could not find biome for position', cell_position) 
+				return
 			
-			if not indoors:
+			set_cells_terrain_connect(0, [cell_position], 0, biome.terrain_id, false)
+			if not biome.indoors:
 				light_map.set_outdoors(cell_position, true)
-	
-	for terrain in cells:
-		set_cells_terrain_connect(0, cells[terrain], 0, terrain, false)
-	
-	generate_scenes(cells[BaseTerrain.GRASS], grass_scenes)
-	generate_scenes(cells[BaseTerrain.FOREST], forest_scenes)
-	generate_cave_scenes(cells[BaseTerrain.CAVE], cave_scenes, cave_wall_scenes)
+			
+			if biome.is_cave:
+				generate_cave_scene(cell_position, biome.map_scenes, biome.cave_wall_scenes)
+			else:
+				generate_scene(cell_position, biome.map_scenes)
 	
 	light_map.recalculate_outdoor_lightmap()
 	light_map.recalculate_lightmap()
@@ -88,26 +68,23 @@ func generate_map(width: int, height: int, x_offset: int = 0, y_offset: int = 0)
 	generation_finished.emit()
 
 
-func generate_scenes(cells: Array[Vector2i], map_scenes: Array[MapScene]):
+func generate_scene(cell: Vector2i, map_scenes: Array[MapScene]):
 	var total_weight = get_total_weight(map_scenes)
-	
-	for cell in cells:
-		var cell_position = map_to_local(cell)
-		generate_scene_at_position(map_scenes, total_weight, cell_position)
+	var cell_position = map_to_local(cell)
+	generate_scene_at_position(map_scenes, total_weight, cell_position)
 
 
-func generate_cave_scenes(cells: Array[Vector2i], map_scenes: Array[MapScene], wall_scenes: Array[MapScene]):
+func generate_cave_scene(cell: Vector2i, map_scenes: Array[MapScene], wall_scenes: Array[MapScene]):
 	var total_weight = get_total_weight(map_scenes)
 	var total_wall_weight = get_total_weight(wall_scenes)
 	
-	for cell in cells:
-		var local_cell_position = map_to_local(cell)
-		
-		if cave_noise.get_noise_2d(local_cell_position.x, local_cell_position.y) > 0.22:
-			generate_scene_at_position(map_scenes, total_weight, local_cell_position)
-		else:
-			generate_scene_at_position(wall_scenes, total_wall_weight, local_cell_position)
-			light_map.set_blocked(cell, true)
+	var local_cell_position = map_to_local(cell)
+	
+	if cave_noise.get_noise_2d(local_cell_position.x, local_cell_position.y) > 0.22:
+		generate_scene_at_position(map_scenes, total_weight, local_cell_position)
+	else:
+		generate_scene_at_position(wall_scenes, total_wall_weight, local_cell_position)
+		light_map.set_blocked(cell, true)
 
 
 func get_total_weight(scene_list: Array[MapScene]) -> int:

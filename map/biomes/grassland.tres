@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=10 format=3 uid="uid://bhycyjjprbbv"]
+
+[ext_resource type="Script" path="res://map/biome.gd" id="1_fc6li"]
+[ext_resource type="Script" path="res://map/map_scene.gd" id="1_x3tvu"]
+[ext_resource type="PackedScene" uid="uid://cdnu21nmx5s8l" path="res://entity/grass/maple_tree.tscn" id="2_odci8"]
+[ext_resource type="PackedScene" uid="uid://10nyibp2lrf1" path="res://entity/grass/grassland_rock.tscn" id="3_f15oi"]
+[ext_resource type="PackedScene" uid="uid://dooummp6f7drk" path="res://entity/grass/two_rock.tscn" id="4_sw3k5"]
+
+[sub_resource type="Resource" id="Resource_5tx2u"]
+script = ExtResource("1_x3tvu")
+weight = 5000
+
+[sub_resource type="Resource" id="Resource_6dgr7"]
+script = ExtResource("1_x3tvu")
+scene = ExtResource("2_odci8")
+weight = 5
+
+[sub_resource type="Resource" id="Resource_yy54m"]
+script = ExtResource("1_x3tvu")
+scene = ExtResource("3_f15oi")
+weight = 5
+
+[sub_resource type="Resource" id="Resource_2p8nv"]
+script = ExtResource("1_x3tvu")
+scene = ExtResource("4_sw3k5")
+weight = 10
+
+[resource]
+script = ExtResource("1_fc6li")
+terrain_id = 0
+map_scenes = Array[ExtResource("1_x3tvu")]([SubResource("Resource_5tx2u"), SubResource("Resource_6dgr7"), SubResource("Resource_yy54m"), SubResource("Resource_2p8nv")])
+is_cave = false
+cave_wall_scenes = Array[ExtResource("1_x3tvu")]([])

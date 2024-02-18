@@ -1,0 +1,46 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=14 format=3 uid="uid://difog60fghf33"]
+
+[ext_resource type="PackedScene" uid="uid://drvdh7pnccfri" path="res://entity/cave/cave_wall.tscn" id="1_cejo1"]
+[ext_resource type="Script" path="res://map/biome.gd" id="1_covni"]
+[ext_resource type="Script" path="res://map/map_scene.gd" id="1_fd4xo"]
+[ext_resource type="PackedScene" uid="uid://c4ahfhekqnx6x" path="res://entity/cave/three_rock.tscn" id="2_sqtlb"]
+[ext_resource type="PackedScene" uid="uid://xi2yxokovomc" path="res://entity/cave/iron_ore_wall.tscn" id="3_pnv34"]
+[ext_resource type="PackedScene" uid="uid://mr8qxdr654hf" path="res://entity/cave/gold_ore_wall.tscn" id="4_ne5jo"]
+[ext_resource type="PackedScene" uid="uid://dxrqn3arlyj6o" path="res://entity/cave/sapphire_gem_wall.tscn" id="5_yxqod"]
+
+[sub_resource type="Resource" id="Resource_w1klh"]
+script = ExtResource("1_fd4xo")
+scene = ExtResource("1_cejo1")
+weight = 2000
+
+[sub_resource type="Resource" id="Resource_2cxnm"]
+script = ExtResource("1_fd4xo")
+scene = ExtResource("3_pnv34")
+weight = 50
+
+[sub_resource type="Resource" id="Resource_2coht"]
+script = ExtResource("1_fd4xo")
+scene = ExtResource("4_ne5jo")
+weight = 5
+
+[sub_resource type="Resource" id="Resource_cyln4"]
+script = ExtResource("1_fd4xo")
+scene = ExtResource("5_yxqod")
+weight = 1
+
+[sub_resource type="Resource" id="Resource_iyxvn"]
+script = ExtResource("1_fd4xo")
+weight = 1000
+
+[sub_resource type="Resource" id="Resource_ucbcx"]
+script = ExtResource("1_fd4xo")
+scene = ExtResource("2_sqtlb")
+weight = 15
+
+[resource]
+script = ExtResource("1_covni")
+terrain_id = 5
+map_scenes = Array[ExtResource("1_fd4xo")]([SubResource("Resource_iyxvn"), SubResource("Resource_ucbcx")])
+indoors = true
+is_cave = true
+cave_wall_scenes = Array[ExtResource("1_fd4xo")]([SubResource("Resource_w1klh"), SubResource("Resource_2cxnm"), SubResource("Resource_2coht"), SubResource("Resource_cyln4")])

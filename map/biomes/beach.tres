@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Biome" load_steps=2 format=3 uid="uid://b2bwdpucjt8g0"]
+
+[ext_resource type="Script" path="res://map/biome.gd" id="1_duris"]
+
+[resource]
+script = ExtResource("1_duris")
+terrain_id = 1
+map_scenes = Array[Resource("res://map/map_scene.gd")]([])
