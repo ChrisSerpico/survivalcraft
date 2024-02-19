@@ -79,15 +79,15 @@ func rerender_positions(cell_positions: Array):
 		set_cell(0, cell_position, 0, Vector2i(mini(calculated_lightmap[cell_position], MAX_LIGHT), 0))
 
 
-func propogate_light_at_position(position: Vector2i, light_map: Dictionary, brightness: int):
-	if light_map.get(position, 0) >= brightness:
+func propogate_light_at_position(light_position: Vector2i, light_map: Dictionary, brightness: int):
+	if light_map.get(light_position, 0) >= brightness:
 		return
 	
 	var light_level = brightness
 	var visited_cells = {
-		position: true
+		light_position: true
 	}
-	var cells_to_check = [position]
+	var cells_to_check = [light_position]
 	
 	while len(cells_to_check) > 0:
 		for i in range(len(cells_to_check)):
@@ -112,17 +112,17 @@ func propogate_light_at_position(position: Vector2i, light_map: Dictionary, brig
 			break
 
 
-func add_light(position: Vector2i, brightness: int):
-	if lights.has(position):
-		remove_light(position)
+func add_light(light_position: Vector2i, brightness: int):
+	if lights.has(light_position):
+		remove_light(light_position)
 	
-	lights[position] = brightness
+	lights[light_position] = brightness
 	
-	if temp_lightmap.get(position, 0) >= brightness:
+	if temp_lightmap.get(light_position, 0) >= brightness:
 		return
 	
-	propogate_light_at_position(position, temp_lightmap, brightness)
-	recalculate_lightmap_in_area(position, brightness - 1)
+	propogate_light_at_position(light_position, temp_lightmap, brightness)
+	recalculate_lightmap_in_area(light_position, brightness - 1)
 
 
 func remove_light(cell_position: Vector2i):

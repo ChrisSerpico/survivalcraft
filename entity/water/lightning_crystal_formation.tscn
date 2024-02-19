@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://cljdnrwo1swa0"]
+
+[ext_resource type="Script" path="res://entity/entity.gd" id="1_c1m52"]
+[ext_resource type="Texture2D" uid="uid://byjtc2g3ul5bq" path="res://entity/assets/lightning_crystal_formation.tres" id="2_1ktmd"]
+[ext_resource type="PackedScene" uid="uid://r6tccf1wwidy" path="res://component/resource_node.tscn" id="3_hcwxy"]
+[ext_resource type="Resource" uid="uid://c4m1n7lc3himi" path="res://items/resources/gems/lightning_crystal.tres" id="4_pfiaj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3cshh"]
+size = Vector2(8, 8)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mun6p"]
+radius = 8.0
+
+[node name="LightningCrystalFormation" type="Node2D"]
+position = Vector2(0, 5)
+script = ExtResource("1_c1m52")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
+position = Vector2(0, -1)
+texture = ExtResource("2_1ktmd")
+offset = Vector2(0, -6)
+region_rect = Rect2(64, 160, 16, 16)
+
+[node name="WaterOverlay" type="ColorRect" parent="Sprite2D"]
+offset_left = -8.0
+offset_top = -4.0
+offset_right = 8.0
+offset_bottom = 3.0
+color = Color(0.223529, 0.690196, 0.831373, 0.92549)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_3cshh")
+
+[node name="ResourceNode" parent="." instance=ExtResource("3_hcwxy")]
+visible = false
+required_collection_strength = 2
+required_collection_type = 2
+dropped_item = ExtResource("4_pfiaj")
+item_count = 3
+base_time_to_collect = 6.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ResourceNode"]
+position = Vector2(0, -6)
+shape = SubResource("CircleShape2D_mun6p")
+debug_color = Color(0.87451, 0.333333, 0.270588, 0.419608)
+
+[connection signal="resource_created" from="ResourceNode" to="." method="create_instance"]
+[connection signal="resources_depleted" from="ResourceNode" to="." method="remove"]

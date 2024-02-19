@@ -1,10 +1,22 @@
-[gd_resource type="Resource" script_class="Biome" load_steps=2 format=3 uid="uid://dp7m5wpbm2kre"]
+[gd_resource type="Resource" script_class="Biome" load_steps=6 format=3 uid="uid://dp7m5wpbm2kre"]
 
+[ext_resource type="Script" path="res://map/map_scene.gd" id="1_5c30v"]
 [ext_resource type="Script" path="res://map/biome.gd" id="1_hbboy"]
+[ext_resource type="PackedScene" uid="uid://cljdnrwo1swa0" path="res://entity/water/lightning_crystal_formation.tscn" id="2_tr13x"]
+
+[sub_resource type="Resource" id="Resource_q61qt"]
+script = ExtResource("1_5c30v")
+weight = 3000
+
+[sub_resource type="Resource" id="Resource_c5xgf"]
+script = ExtResource("1_5c30v")
+scene = ExtResource("2_tr13x")
+weight = 5
 
 [resource]
 script = ExtResource("1_hbboy")
 terrain_id = 2
-map_scenes = Array[Resource("res://map/map_scene.gd")]([])
+map_scenes = Array[ExtResource("1_5c30v")]([SubResource("Resource_q61qt"), SubResource("Resource_c5xgf")])
+indoors = false
 is_cave = false
-cave_wall_scenes = Array[Resource("res://map/map_scene.gd")]([])
+cave_wall_scenes = Array[ExtResource("1_5c30v")]([])

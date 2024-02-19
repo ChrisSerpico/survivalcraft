@@ -6,3 +6,6 @@
 script = ExtResource("1_duris")
 terrain_id = 1
 map_scenes = Array[Resource("res://map/map_scene.gd")]([])
+indoors = false
+is_cave = false
+cave_wall_scenes = Array[Resource("res://map/map_scene.gd")]([])
