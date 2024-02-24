@@ -17,6 +17,9 @@ class_name ItemData
 @export_group("Damage")
 @export var base_damage: int = 1
 
+@export_group("Lighting")
+@export var luminosity: int = 1
+
 
 func get_scene_instance() -> Item:
 	var instance = dropped_base_scene.instantiate() as Item

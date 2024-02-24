@@ -1,22 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://dx1hhu4mlvfqt"]
+[gd_scene load_steps=7 format=3 uid="uid://fra5aj2jx14g"]
 
-[ext_resource type="Script" path="res://entity/entity.gd" id="1_cy011"]
-[ext_resource type="Texture2D" uid="uid://o3raaupolh7r" path="res://entity/assets/bush.tres" id="2_8vhgj"]
-[ext_resource type="PackedScene" uid="uid://r6tccf1wwidy" path="res://component/resource_node.tscn" id="3_mey20"]
-[ext_resource type="Resource" uid="uid://cd68ah3eokgta" path="res://items/resources/stick.tres" id="4_rjqgy"]
+[ext_resource type="Script" path="res://entity/entity.gd" id="1_kv44c"]
+[ext_resource type="Texture2D" uid="uid://5w4hx3ehrmxv" path="res://entity/assets/reeds.tres" id="2_oqsir"]
+[ext_resource type="PackedScene" uid="uid://r6tccf1wwidy" path="res://component/resource_node.tscn" id="3_ju656"]
+[ext_resource type="Resource" uid="uid://ddfbkp5acqhis" path="res://items/resources/reed.tres" id="4_twunu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0xs2x"]
-size = Vector2(9, 7.5)
+size = Vector2(2, 7.5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_j181u"]
 radius = 7.0
 
-[node name="Bush" type="Node2D"]
-script = ExtResource("1_cy011")
+[node name="Reed" type="Node2D"]
+script = ExtResource("1_kv44c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -1)
-texture = ExtResource("2_8vhgj")
+position = Vector2(0, -4)
+texture = ExtResource("2_oqsir")
 offset = Vector2(0, -4)
 region_rect = Rect2(256, 240, 16, 16)
 
@@ -26,9 +26,12 @@ region_rect = Rect2(256, 240, 16, 16)
 position = Vector2(0, -4.25)
 shape = SubResource("RectangleShape2D_0xs2x")
 
-[node name="ResourceNode" parent="." instance=ExtResource("3_mey20")]
-dropped_item = ExtResource("4_rjqgy")
+[node name="ResourceNode" parent="." instance=ExtResource("3_ju656")]
+required_collection_strength = 1
+required_collection_type = 1
+dropped_item = ExtResource("4_twunu")
 item_count = 1
+base_time_to_collect = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ResourceNode"]
 position = Vector2(0, -5)

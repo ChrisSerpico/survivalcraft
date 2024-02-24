@@ -29,5 +29,6 @@ weight = 10
 script = ExtResource("1_fc6li")
 terrain_id = 0
 map_scenes = Array[ExtResource("1_x3tvu")]([SubResource("Resource_5tx2u"), SubResource("Resource_6dgr7"), SubResource("Resource_yy54m"), SubResource("Resource_2p8nv")])
+indoors = false
 is_cave = false
 cave_wall_scenes = Array[ExtResource("1_x3tvu")]([])

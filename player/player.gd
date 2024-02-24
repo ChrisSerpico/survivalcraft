@@ -26,6 +26,8 @@ var floating_slot: SlotData
 
 @export var known_recipes: Array[RecipeData]
 
+@export var base_luminosity: int = 2
+
 var ejection_speed: float = 350
 
 var in_menu: bool = false
@@ -80,7 +82,7 @@ func _process(delta):
 	animated_sprite.update_animation(velocity, running, !in_menu and Input.is_action_pressed("primary"))
 	move_and_slide()
 	
-		# Item usage
+	# Item usage
 	if in_menu: 
 		return
 	
@@ -199,6 +201,17 @@ func handle_primary_interaction(delta: float):
 	
 	if interaction_target is ResourceNode:
 		interaction_target.add_collection_progress(delta, active_equipment_slot.item)
+
+
+func get_luminosity():
+	var highest_luminosity = base_luminosity
+	
+	for i in range(equipment_size):
+		if not inventory.slots[i].is_empty():
+			highest_luminosity = maxi(inventory.slots[i].item.luminosity, highest_luminosity)
+	
+	return highest_luminosity
+
 
 # TODO: remove/change once easter egg is finished 
 func check_easter_egg_recipe(item: ItemData):

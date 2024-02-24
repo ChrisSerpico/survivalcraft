@@ -137,4 +137,4 @@ func update_seed(new_seed: int = 0):
 
 func _on_player_moved_tiles(previous_position: Vector2i, new_position: Vector2i, player_instance: Player):
 	light_map.remove_light(previous_position)
-	light_map.add_light(new_position, 6)
+	light_map.add_light(new_position, player_instance.get_luminosity())
