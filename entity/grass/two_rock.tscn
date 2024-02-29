@@ -8,7 +8,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_mun6p"]
 radius = 8.0
 
-[node name="GrasslandRock" type="Node2D"]
+[node name="TwoRock" type="Node2D"]
 position = Vector2(0, -5)
 script = ExtResource("1_o1x8b")
 

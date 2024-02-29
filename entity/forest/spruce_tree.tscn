@@ -19,7 +19,7 @@ max_produced = 3
 [sub_resource type="CircleShape2D" id="CircleShape2D_j181u"]
 radius = 8.0
 
-[node name="Spruce Tree" type="Node2D"]
+[node name="SpruceTree" type="Node2D"]
 script = ExtResource("1_ms6xk")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
