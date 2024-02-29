@@ -63,7 +63,7 @@ func generate_map(width: int, height: int, x_offset: int = 0, y_offset: int = 0)
 				generate_scene(cell_position, biome.map_scenes)
 	
 	light_map.recalculate_outdoor_lightmap()
-	light_map.recalculate_lightmap()
+	light_map.render_lightmap()
 	
 	generation_finished.emit()
 
@@ -84,7 +84,6 @@ func generate_cave_scene(cell: Vector2i, map_scenes: Array[MapScene], wall_scene
 		generate_scene_at_position(map_scenes, total_weight, local_cell_position)
 	else:
 		generate_scene_at_position(wall_scenes, total_wall_weight, local_cell_position)
-		light_map.set_blocked(cell, true)
 
 
 func get_total_weight(scene_list: Array[MapScene]) -> int:
@@ -109,9 +108,13 @@ func generate_scene_at_position(possible_scenes: Array[MapScene], total_weight: 
 
 
 func instantiate_scene_at_position(scene: PackedScene, at_position: Vector2):
-	var instance = scene.instantiate() as Node2D
+	var instance = scene.instantiate() as Entity
 	instance.position = at_position
 	add_child(instance)
+	instance.entity_removed.connect(_on_entity_removed)
+	
+	if instance.blocks_light:
+		light_map.block_cell(local_to_map(at_position))
 
 
 func clear_map():
@@ -138,3 +141,8 @@ func update_seed(new_seed: int = 0):
 func _on_player_moved_tiles(previous_position: Vector2i, new_position: Vector2i, player_instance: Player):
 	light_map.remove_light(previous_position)
 	light_map.add_light(new_position, player_instance.get_luminosity())
+
+
+func _on_entity_removed(entity_instance: Entity):
+	if (entity_instance.blocks_light):
+		light_map.clear_blocked(local_to_map(entity_instance.position))
