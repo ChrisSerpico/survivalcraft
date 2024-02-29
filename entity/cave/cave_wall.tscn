@@ -21,6 +21,7 @@ size = Vector2(16, 16)
 
 [node name="Cave Wall" type="Node2D"]
 script = ExtResource("1_e87ew")
+blocks_light = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_jj5ab")
