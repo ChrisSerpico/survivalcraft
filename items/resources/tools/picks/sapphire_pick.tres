@@ -15,3 +15,4 @@ collection_strength = 3
 collection_types = Array[int]([2])
 collection_speed_mod = 999.0
 base_damage = 1
+luminosity = 1
