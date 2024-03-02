@@ -3,6 +3,7 @@ class_name Map
 
 
 signal generation_finished
+signal seed_updated(new_seed: int)
 
 
 enum BaseTerrain {
@@ -136,6 +137,8 @@ func update_seed(new_seed: int = 0):
 		noise.seed = new_seed
 	
 	cave_noise.seed = noise.seed + 1
+	
+	seed_updated.emit(noise.seed)
 
 
 func _on_player_moved_tiles(previous_position: Vector2i, new_position: Vector2i, player_instance: Player):

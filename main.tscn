@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://31wti5s0o1mh"]
+[gd_scene load_steps=15 format=3 uid="uid://31wti5s0o1mh"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_66gbd"]
 [ext_resource type="Script" path="res://player/player_camera.gd" id="1_imwk0"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cnohjchaxs1r1" path="res://player/assets/previews/character03_preview.tres" id="7_h23bh"]
 [ext_resource type="Texture2D" uid="uid://bnv5pdnvpx25m" path="res://player/assets/previews/character04_preview.tres" id="8_ecsaq"]
 [ext_resource type="PackedScene" uid="uid://c3jrufvytiisi" path="res://ui/crafting/crafting_panel.tscn" id="9_36d20"]
+[ext_resource type="Script" path="res://ui/pause_menu.gd" id="9_qddls"]
 [ext_resource type="PackedScene" uid="uid://ci0h0ouh645e1" path="res://ui/floating_inventory_slot.tscn" id="12_jw01c"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qb055"]
@@ -189,6 +190,7 @@ offset_right = 187.0
 offset_bottom = 78.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("9_qddls")
 
 [node name="MarginContainer" type="MarginContainer" parent="ControlLayer/PauseMenu"]
 layout_mode = 2
@@ -205,6 +207,16 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "System Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="ControlLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="SeedLabel" type="Label" parent="ControlLayer/PauseMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Seed: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 

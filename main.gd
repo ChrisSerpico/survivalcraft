@@ -46,6 +46,8 @@ var local_player_instance: Player
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	map.generate_map(40, 24, -20, -12)
+	
+	map.seed_updated.connect(pause_menu._on_seed_updated)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
