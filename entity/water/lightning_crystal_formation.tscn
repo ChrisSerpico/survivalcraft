@@ -36,7 +36,6 @@ position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_3cshh")
 
 [node name="ResourceNode" parent="." instance=ExtResource("3_hcwxy")]
-visible = false
 required_collection_strength = 2
 required_collection_type = 2
 dropped_item = ExtResource("4_pfiaj")
