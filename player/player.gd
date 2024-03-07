@@ -6,6 +6,7 @@ signal recipe_list_updated(recipe_list: Array[RecipeData], inventory: InventoryD
 signal moved_tiles(previous_position: Vector2i, new_position: Vector2i, player_instance: Player)
 
 
+@onready var base_sprite: Sprite2D = $Sprite2D
 @onready var animated_sprite: PlayerSprite = $AnimationPlayer
 @onready var sprite_overlay: ColorRect = $Sprite2D/Overlay
 @onready var interaction_ray: RayCast2D = $InteractionRay
@@ -211,6 +212,10 @@ func get_luminosity():
 			highest_luminosity = maxi(inventory.slots[i].item.luminosity, highest_luminosity)
 	
 	return highest_luminosity
+
+
+func change_sprite(new_sprite: Texture2D):
+	base_sprite.texture = new_sprite
 
 
 # TODO: remove/change once easter egg is finished 

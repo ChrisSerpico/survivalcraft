@@ -35,8 +35,9 @@ enum GameState {
 @onready var pause_menu: Control = $ControlLayer/PauseMenu
 @onready var loading_panel: Control = $ControlLayer/LoadingPanel
 
-# PackedScenes
+# Player
 @export var player_scene: PackedScene
+@export var player_texture: Texture2D
 
 # Internal variables
 var current_state: GameState = GameState.MAIN_MENU
@@ -86,6 +87,7 @@ func spawn_player():
 	
 	local_player_instance = player_scene.instantiate() as Player
 	map.add_child(local_player_instance)
+	local_player_instance.change_sprite(player_texture)
 	
 	local_player_instance.map = map
 	local_player_instance.moved_tiles.connect(map._on_player_moved_tiles)
@@ -157,3 +159,7 @@ func toggle_pause_menu():
 		current_state = GameState.PAUSE_MENU
 		pause_menu.show()
 		local_player_instance.in_menu = true
+
+
+func _on_character_texture_selected(texture: Texture2D):
+	player_texture = texture

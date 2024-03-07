@@ -1,24 +1,44 @@
-[gd_scene load_steps=15 format=3 uid="uid://31wti5s0o1mh"]
+[gd_scene load_steps=21 format=3 uid="uid://31wti5s0o1mh"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_66gbd"]
 [ext_resource type="Script" path="res://player/player_camera.gd" id="1_imwk0"]
 [ext_resource type="PackedScene" uid="uid://bvr42052hcfky" path="res://map/map.tscn" id="1_vh020"]
 [ext_resource type="PackedScene" uid="uid://dsuxj5tk61781" path="res://player/player.tscn" id="3_jsy6t"]
-[ext_resource type="Texture2D" uid="uid://c2tqxxlemsgu8" path="res://player/assets/previews/character01_preview.tres" id="5_21vsx"]
+[ext_resource type="Texture2D" uid="uid://bv46wtyfajcni" path="res://player/assets/character01.tres" id="5_hl756"]
 [ext_resource type="PackedScene" uid="uid://5tiuvfleto82" path="res://ui/inventory_panel.tscn" id="5_qphmv"]
-[ext_resource type="Texture2D" uid="uid://fatddl26hdia" path="res://player/assets/previews/character02_preview.tres" id="6_uarvs"]
+[ext_resource type="Texture2D" uid="uid://dhyrkqx6vqrxh" path="res://player/assets/character02.tres" id="6_s11wt"]
+[ext_resource type="Script" path="res://ui/main_menu/character_select_button.gd" id="6_vguls"]
 [ext_resource type="PackedScene" uid="uid://wviovmg6oqis" path="res://ui/item_tooltip.tscn" id="7_3ruep"]
-[ext_resource type="Texture2D" uid="uid://cnohjchaxs1r1" path="res://player/assets/previews/character03_preview.tres" id="7_h23bh"]
-[ext_resource type="Texture2D" uid="uid://bnv5pdnvpx25m" path="res://player/assets/previews/character04_preview.tres" id="8_ecsaq"]
+[ext_resource type="Texture2D" uid="uid://db57si32ckplf" path="res://player/assets/character03.tres" id="7_dqkax"]
+[ext_resource type="Texture2D" uid="uid://cepx5285vs782" path="res://player/assets/character04.tres" id="8_4ib00"]
 [ext_resource type="PackedScene" uid="uid://c3jrufvytiisi" path="res://ui/crafting/crafting_panel.tscn" id="9_36d20"]
 [ext_resource type="Script" path="res://ui/pause_menu.gd" id="9_qddls"]
 [ext_resource type="PackedScene" uid="uid://ci0h0ouh645e1" path="res://ui/floating_inventory_slot.tscn" id="12_jw01c"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_lprwg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dop6a"]
+atlas = ExtResource("5_hl756")
+region = Rect2(16, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hwnmo"]
+atlas = ExtResource("6_s11wt")
+region = Rect2(16, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebpmx"]
+atlas = ExtResource("7_dqkax")
+region = Rect2(16, 0, 16, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4rj0w"]
+atlas = ExtResource("8_4ib00")
+region = Rect2(16, 0, 16, 20)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qb055"]
 
 [node name="Main" type="Node" groups=["main"]]
 script = ExtResource("1_66gbd")
 player_scene = ExtResource("3_jsy6t")
+player_texture = ExtResource("5_hl756")
 
 [node name="World" type="Node2D" parent="."]
 
@@ -66,30 +86,59 @@ vertical_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer"]
+[node name="CharacterSelect" type="HBoxContainer" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Char1" type="Button" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect"]
 custom_minimum_size = Vector2(64, 80)
 layout_mode = 2
-texture = ExtResource("5_21vsx")
+theme_type_variation = &"HighlightedButton"
+toggle_mode = true
+button_pressed = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_lprwg")
+icon = SubResource("AtlasTexture_dop6a")
+expand_icon = true
+script = ExtResource("6_vguls")
+character_texture = ExtResource("5_hl756")
 
-[node name="TextureRect2" type="TextureRect" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Char2" type="Button" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect"]
 custom_minimum_size = Vector2(64, 80)
 layout_mode = 2
-texture = ExtResource("6_uarvs")
+theme_type_variation = &"HighlightedButton"
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_lprwg")
+icon = SubResource("AtlasTexture_hwnmo")
+expand_icon = true
+script = ExtResource("6_vguls")
+character_texture = ExtResource("6_s11wt")
 
-[node name="TextureRect3" type="TextureRect" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Char3" type="Button" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect"]
 custom_minimum_size = Vector2(64, 80)
 layout_mode = 2
-texture = ExtResource("7_h23bh")
+theme_type_variation = &"HighlightedButton"
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_lprwg")
+icon = SubResource("AtlasTexture_ebpmx")
+expand_icon = true
+script = ExtResource("6_vguls")
+character_texture = ExtResource("7_dqkax")
 
-[node name="TextureRect4" type="TextureRect" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Char4" type="Button" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect"]
 custom_minimum_size = Vector2(64, 80)
 layout_mode = 2
-texture = ExtResource("8_ecsaq")
+theme_type_variation = &"HighlightedButton"
+toggle_mode = true
+action_mode = 0
+button_group = SubResource("ButtonGroup_lprwg")
+icon = SubResource("AtlasTexture_4rj0w")
+expand_icon = true
+script = ExtResource("6_vguls")
+character_texture = ExtResource("8_4ib00")
 
 [node name="Title2" type="Label" parent="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -276,6 +325,14 @@ visible = false
 visible = false
 
 [connection signal="generation_finished" from="World/Map" to="." method="spawn_player"]
+[connection signal="character_texture_selected" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect/Char1" to="." method="_on_character_texture_selected"]
+[connection signal="toggled" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect/Char1" to="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect/Char1" method="_on_toggled"]
+[connection signal="character_texture_selected" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect/Char2" to="." method="_on_character_texture_selected"]
+[connection signal="toggled" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect/Char2" to="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect/Char2" method="_on_toggled"]
+[connection signal="character_texture_selected" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect/Char3" to="." method="_on_character_texture_selected"]
+[connection signal="toggled" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect/Char3" to="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect/Char3" method="_on_toggled"]
+[connection signal="character_texture_selected" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect/Char4" to="." method="_on_character_texture_selected"]
+[connection signal="toggled" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect/Char4" to="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/CharacterSelect/Char4" method="_on_toggled"]
 [connection signal="pressed" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/NewGameButton" to="." method="start_new_game"]
 [connection signal="pressed" from="ControlLayer/NewGameMenu/MarginContainer/VBoxContainer/ExitGameButton" to="." method="exit_game"]
 [connection signal="pressed" from="ControlLayer/PauseMenu/MarginContainer/VBoxContainer/MainMenuButton" to="." method="return_to_main_menu"]
